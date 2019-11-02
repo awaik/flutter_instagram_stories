@@ -71,30 +71,32 @@ class StoryItem {
     ] /** white text */);
 
     return StoryItem(
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(roundedTop ? 8 : 0),
-              bottom: Radius.circular(roundedBottom ? 8 : 0),
-            ),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
-          ),
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: contrast > 1.8 ? Colors.white : Colors.black,
-                fontSize: fontSize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          //color: backgroundColor,
-        ),
+        title.length > 0
+            ? Container(
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(roundedTop ? 8 : 0),
+                    bottom: Radius.circular(roundedBottom ? 8 : 0),
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: contrast > 1.8 ? Colors.white : Colors.black,
+                      fontSize: fontSize,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                //color: backgroundColor,
+              )
+            : Container(),
         shown: shown);
   }
 
