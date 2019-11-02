@@ -148,9 +148,7 @@ class StoryItem {
                         ),
                       ),
                     )
-                  : Container(
-                      child: Text("3333"),
-                    ),
+                  : Container(),
             ],
           ),
         ),
@@ -247,9 +245,7 @@ class StoryItem {
                         ),
                       ),
                     )
-                  : Container(
-                      child: Text("11111"),
-                    ),
+                  : Container(),
             ],
           ),
         ),
@@ -303,9 +299,7 @@ class StoryItem {
                         ),
                       ),
                     )
-                  : Container(
-                      child: Text("2222"),
-                    ),
+                  : Container(),
             ],
           ),
         ),
