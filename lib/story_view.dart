@@ -83,7 +83,7 @@ class StoryItem {
           ),
           child: Center(
             child: Text(
-              title + "11",
+              title,
               style: TextStyle(
                 color: contrast > 1.8 ? Colors.white : Colors.black,
                 fontSize: fontSize,
@@ -135,7 +135,7 @@ class StoryItem {
                         caption != null ? Colors.black54 : Colors.transparent,
                     child: caption != null
                         ? Text(
-                            caption + "22",
+                            caption,
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.white,
@@ -225,11 +225,12 @@ class StoryItem {
                       horizontal: 24,
                       vertical: 8,
                     ),
-                    color:
-                        caption != null ? Colors.black54 : Colors.transparent,
-                    child: caption != null
+                    color: caption != null && caption.length > 0
+                        ? Colors.black54
+                        : Colors.red,
+                    child: caption != null && caption.length > 0
                         ? Text(
-                            caption,
+                            caption + '22',
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.white,
