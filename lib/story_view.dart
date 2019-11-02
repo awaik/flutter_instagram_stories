@@ -213,34 +213,36 @@ class StoryItem {
                 fit: imageFit,
                 requestHeaders: requestHeaders,
               ),
-              SafeArea(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      bottom: 24,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 8,
-                    ),
-                    color: caption != null && caption.length > 0
-                        ? Colors.black54
-                        : Colors.red,
-                    child: caption != null && caption.length > 0
-                        ? Text(
-                            caption + '22',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          )
-                        : SizedBox(),
-                  ),
-                ),
-              )
+              caption != null && caption.length > 0
+                  ? SafeArea(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(
+                            bottom: 24,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 8,
+                          ),
+                          color: caption != null && caption.length > 0
+                              ? Colors.black54
+                              : Colors.red,
+                          child: caption != null && caption.length > 0
+                              ? Text(
+                                  caption,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )
+                              : SizedBox(),
+                        ),
+                      ),
+                    )
+                  : Container(),
             ],
           ),
         ),
