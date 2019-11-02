@@ -242,7 +242,9 @@ class StoryItem {
                         ),
                       ),
                     )
-                  : Container(),
+                  : Container(
+                      child: Text("11111"),
+                    ),
             ],
           ),
         ),
@@ -279,22 +281,26 @@ class StoryItem {
                 fit: imageFit,
                 requestHeaders: requestHeaders,
               ),
-              Container(
-                margin: EdgeInsets.only(
-                  bottom: 16,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 8,
-                ),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                    child: caption == null ? SizedBox() : caption,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
+              caption.data != null && caption.data.length > 0
+                  ? Container(
+                      margin: EdgeInsets.only(
+                        bottom: 16,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 8,
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          child: caption == null ? SizedBox() : caption,
+                          width: double.infinity,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      child: Text("2222"),
+                    ),
             ],
           ),
         ),
