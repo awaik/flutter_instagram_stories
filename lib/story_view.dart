@@ -641,21 +641,21 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                         () => TapGestureRecognizer(), (instance) {
                   instance
                     ..onTapDown = (details) {
-                      print('++++++++++++++++++++0');
+                      print('++++++++++++++++++++00');
                       controlPause();
                       debouncer?.cancel();
                       debouncer = Timer(Duration(milliseconds: 100), () {});
                     }
                     ..onSecondaryTapUp = (details) {
-                      print('++++++++++++++++++++1');
+                      print('++++++++++++++++++++11');
                       if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++4');
+                        print('++++++++++++++++++++44');
                         debouncer.cancel();
                         debouncer = null;
 
                         goForward();
                       } else {
-                        print('++++++++++++++++++++3');
+                        print('++++++++++++++++++++33');
                         debouncer.cancel();
                         debouncer = null;
 
@@ -663,15 +663,15 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                       }
                     }
                     ..onTapCancel = () {
-                      print('++++++++++++++++++++1');
+                      print('++++++++++++++++++++55');
                       if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++4');
+                        print('++++++++++++++++++++66');
                         debouncer.cancel();
                         debouncer = null;
 
                         goForward();
                       } else {
-                        print('++++++++++++++++++++3');
+                        print('++++++++++++++++++++77');
                         debouncer.cancel();
                         debouncer = null;
 
@@ -679,15 +679,15 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                       }
                     }
                     ..onTapUp = (details) {
-                      print('++++++++++++++++++++1');
+                      print('++++++++++++++++++++88');
                       if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++4');
+                        print('++++++++++++++++++++99');
                         debouncer.cancel();
                         debouncer = null;
 
                         goForward();
                       } else {
-                        print('++++++++++++++++++++3');
+                        print('++++++++++++++++++++00');
                         debouncer.cancel();
                         debouncer = null;
 
