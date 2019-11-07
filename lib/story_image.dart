@@ -121,7 +121,6 @@ class StoryImageState extends State<StoryImage> {
         }
 
         if (playbackState == PlaybackState.pause) {
-          print('++++++++++++++++++++22222');
           this._timer?.cancel();
         } else {
           forward();
@@ -130,7 +129,6 @@ class StoryImageState extends State<StoryImage> {
     }
 
     widget.controller?.pause();
-    print('++++++++++++++++++++333333');
 
     widget.imageLoader.loadImage(() async {
       if (mounted) {
