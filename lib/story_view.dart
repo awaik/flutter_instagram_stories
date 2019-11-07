@@ -640,54 +640,23 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                     GestureRecognizerFactoryWithHandlers<TapGestureRecognizer>(
                         () => TapGestureRecognizer(), (instance) {
                   instance
+                    ..onTap = () {
+                      goForward();
+                    }
                     ..onTapDown = (details) {
-                      print('++++++++++++++++++++00');
+                      print('+++onTapDown');
                       controlPause();
                       debouncer?.cancel();
-                      debouncer = Timer(Duration(milliseconds: 100), () {});
-                    }
-                    ..onSecondaryTapUp = (details) {
-                      print('++++++++++++++++++++11');
-                      if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++44');
-                        debouncer.cancel();
-                        debouncer = null;
-
-                        goForward();
-                      } else {
-                        print('++++++++++++++++++++33');
-                        debouncer.cancel();
-                        debouncer = null;
-
-                        controlUnpause();
-                      }
-                    }
-                    ..onTapCancel = () {
-                      print('++++++++++++++++++++55');
-                      if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++66');
-                        debouncer.cancel();
-                        debouncer = null;
-
-                        goForward();
-                      } else {
-                        print('++++++++++++++++++++77');
-                        debouncer.cancel();
-                        debouncer = null;
-
-                        controlUnpause();
-                      }
+                      debouncer = Timer(Duration(milliseconds: 500), () {});
                     }
                     ..onTapUp = (details) {
-                      print('++++++++++++++++++++88');
+                      controlUnpause();
                       if (debouncer?.isActive == true) {
-                        print('++++++++++++++++++++99');
                         debouncer.cancel();
                         debouncer = null;
 
                         goForward();
                       } else {
-                        print('++++++++++++++++++++00');
                         debouncer.cancel();
                         debouncer = null;
 
