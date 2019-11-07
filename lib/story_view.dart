@@ -644,7 +644,7 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                       print('++++++++++++++++++++0');
                       controlPause();
                       debouncer?.cancel();
-                      debouncer = Timer(Duration(milliseconds: 1000), () {});
+                      debouncer = Timer(Duration(milliseconds: 100), () {});
                     }
                     ..onTapUp = (details) {
                       print('++++++++++++++++++++1');
