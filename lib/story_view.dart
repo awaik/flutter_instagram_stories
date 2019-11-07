@@ -650,12 +650,11 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                       debouncer = Timer(Duration(milliseconds: 500), () {});
                     }
                     ..onTapUp = (details) {
-                      controlUnpause();
                       if (debouncer?.isActive == true) {
                         debouncer.cancel();
                         debouncer = null;
-
                         goForward();
+                        controlUnpause();
                       } else {
                         debouncer.cancel();
                         debouncer = null;
