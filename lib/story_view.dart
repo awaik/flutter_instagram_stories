@@ -457,6 +457,7 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
         if (playbackStatus == PlaybackState.play) {
           unpause();
         } else if (playbackStatus == PlaybackState.pause) {
+          print('++++++++++++++++++++11111111');
           pause();
         }
       });
@@ -580,9 +581,12 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
   }
 
   void controlPause() {
+    print('++++++++++++++++++++7777');
     if (widget.controller != null) {
+      print('++++++++++++++++++++8888');
       widget.controller.pause();
     } else {
+      print('++++++++++++++++++++99999');
       pause();
     }
   }
@@ -641,6 +645,7 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                         () => TapGestureRecognizer(), (instance) {
                   instance
                     ..onTapDown = (details) {
+                      print('++++++++++++++++++++5555555');
                       controlPause();
                       debouncer?.cancel();
                       debouncer = Timer(Duration(milliseconds: 500), () {});
