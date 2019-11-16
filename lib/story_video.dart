@@ -73,6 +73,8 @@ class StoryVideoState extends State<StoryVideo> {
   void initState() {
     super.initState();
 
+    widget.storyController.pause();
+
     widget.videoLoader.loadVideo(() {
       if (widget.videoLoader.state == LoadState.success) {
         this.playerController =
