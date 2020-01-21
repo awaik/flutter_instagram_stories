@@ -204,54 +204,57 @@ class StoryItem {
     BoxFit imageFit = BoxFit.fitWidth,
     String caption,
     bool shown = false,
+    Duration duration = const Duration(seconds: 3),
     Map<String, dynamic> requestHeaders,
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
-        Container(
-          color: Colors.black,
-          child: Stack(
-            children: <Widget>[
-              StoryImage.url(
-                url,
-                controller: controller,
-                fit: imageFit,
-                requestHeaders: requestHeaders,
-              ),
-              caption != null && caption.length > 0
-                  ? SafeArea(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            bottom: 24,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 8,
-                          ),
-                          color: caption != null && caption.length > 0
-                              ? Colors.black54
-                              : Colors.red,
-                          child: caption != null && caption.length > 0
-                              ? Text(
-                                  caption,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )
-                              : SizedBox(),
+      Container(
+        color: Colors.black,
+        child: Stack(
+          children: <Widget>[
+            StoryImage.url(
+              url,
+              controller: controller,
+              fit: imageFit,
+              requestHeaders: requestHeaders,
+            ),
+            caption != null && caption.length > 0
+                ? SafeArea(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          bottom: 24,
                         ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 8,
+                        ),
+                        color: caption != null && caption.length > 0
+                            ? Colors.black54
+                            : Colors.red,
+                        child: caption != null && caption.length > 0
+                            ? Text(
+                                caption,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            : SizedBox(),
                       ),
-                    )
-                  : Container(),
-            ],
-          ),
+                    ),
+                  )
+                : Container(),
+          ],
         ),
-        shown: shown);
+      ),
+      shown: shown,
+      duration: duration,
+    );
   }
 
   /// Shorthand for creating inline image page.
@@ -462,8 +465,6 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
       });
     }
   }
-
-
 
   @override
   void dispose() {
