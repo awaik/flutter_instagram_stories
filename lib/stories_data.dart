@@ -1,0 +1,75 @@
+import 'dart:convert';
+import 'package:izga/src/models/stories.dart';
+import 'package:izga/src/theme/constants.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+
+import 'package:flutter_instagram_stories/story_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class StoriesData {
+  List<String> _storiesIdsList = [];
+  List<Stories> _storyWidgets = [];
+  final storyController = StoryController();
+  List<StoryItem> storyItems = [];
+
+  List<String> get storiesIdsList => _storiesIdsList;
+  List<Stories> get storyWidgets => _storyWidgets;
+
+  void parseStoriesPreview(var stories) {
+    for (var story in stories) {
+      final Stories storyData = Stories.fromJson({
+        'storyId': story.documentID,
+        'date':
+            Timestamp(story.data['date'].seconds, 0).toDate().toIso8601String(),
+        'file': jsonDecode(jsonEncode(story.data['file'])),
+        'title': story.data['title'],
+        'previewImage': story.data['previewImage'],
+      });
+      if (storyData.file != null) {
+        _storyWidgets.add(storyData);
+        _storiesIdsList.add(story.documentID);
+
+        // preliminary caching
+        var i = 0;
+        for (var file in storyData.file) {
+          if (file.filetype == 'image' && i < K.cacheDepth) {
+            DefaultCacheManager().getSingleFile(file.url);
+            i += 1;
+          }
+        }
+      }
+    }
+  }
+
+  void parseStories(Map<String, dynamic> toPass) {
+    Map<String, dynamic> temp = {
+      'storyId': toPass['pressedStoryId'],
+      'file': toPass['snapshotData']['file'],
+      'title': toPass['snapshotData']['title'],
+      'previewImage': toPass['snapshotData']['previewImage'],
+    };
+    Stories stories = Stories.fromJson(jsonDecode(jsonEncode(temp)));
+    var storyImage;
+    stories.file.asMap().forEach((index, storyInsideImage) {
+      if (storyInsideImage.filetype != 'video') {
+        storyImage = CachedNetworkImageProvider(storyInsideImage.url);
+        storyItems.add(StoryItem.pageGif(
+          storyInsideImage.url,
+          controller: storyController,
+          duration: Duration(seconds: 10),
+        ));
+      } else {
+        storyItems.add(
+          StoryItem.pageVideo(
+            storyInsideImage.url,
+            controller: storyController,
+          ),
+        );
+      }
+      // cache images inside story
+      if (index < stories.file.length - 1) {
+        DefaultCacheManager().getSingleFile(stories.file[index + 1].url);
+      }
+    });
+  }
+}

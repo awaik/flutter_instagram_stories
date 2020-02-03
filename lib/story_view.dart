@@ -56,6 +56,7 @@ class StoryItem {
     String title,
     Color backgroundColor, {
     bool shown = false,
+    Duration duration = const Duration(seconds: 3),
     double fontSize = 18,
     bool roundedTop = false,
     bool roundedBottom = false,
@@ -106,6 +107,7 @@ class StoryItem {
     BoxFit imageFit = BoxFit.fitWidth,
     String caption,
     bool shown = false,
+    Duration duration = const Duration(seconds: 3),
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
@@ -162,6 +164,7 @@ class StoryItem {
     ImageProvider image, {
     Text caption,
     bool shown = false,
+    Duration duration = const Duration(seconds: 3),
     bool roundedTop = true,
     bool roundedBottom = false,
   }) {
@@ -265,6 +268,7 @@ class StoryItem {
     BoxFit imageFit = BoxFit.cover,
     Map<String, dynamic> requestHeaders,
     bool shown = false,
+    Duration duration = const Duration(seconds: 3),
     bool roundedTop = true,
     bool roundedBottom = false,
   }) {
