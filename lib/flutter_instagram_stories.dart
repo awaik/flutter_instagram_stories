@@ -9,18 +9,20 @@ import 'components//stories_list_skeleton.dart';
 import 'models/stories_data.dart';
 import 'grouped_stories_view.dart';
 
-class StoriesIconsBuilder extends StatefulWidget {
-  Stream<QuerySnapshot> storiesStream;
+class FlutterInstagramStories extends StatefulWidget {
+//  Stream<QuerySnapshot> storiesStream;
   String collectionDbName;
 
-  StoriesIconsBuilder({this.storiesStream, this.collectionDbName});
+  FlutterInstagramStories({this.collectionDbName});
 
   @override
-  _StoriesIconsBuilderState createState() => _StoriesIconsBuilderState();
+  _FlutterInstagramStoriesState createState() =>
+      _FlutterInstagramStoriesState();
 }
 
-class _StoriesIconsBuilderState extends State<StoriesIconsBuilder> {
+class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   final _storiesData = StoriesData();
+  final _firestore = Firestore.instance;
 
   @override
   void dispose() {
@@ -30,7 +32,8 @@ class _StoriesIconsBuilderState extends State<StoriesIconsBuilder> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: widget.storiesStream,
+      stream:
+          Firestore.instance.collection(widget.collectionDbName).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return ListView.builder(

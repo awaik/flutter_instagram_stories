@@ -15,6 +15,10 @@ dependencies:
   video_player: ^0.10.5
   cached_network_image: ^2.0.0
   json_annotation: ^3.0.1
+  skeleton_text: ^1.0.0
+  firebase_core: ^0.4.3+2
+  cloud_firestore: ^0.13.0+1
+  firebase_storage: ^3.1.1
 
 dev_dependencies:
   build_runner: ^1.7.3

@@ -8,23 +8,28 @@ import 'story_video.dart';
 import 'story_image.dart';
 import 'story_controller.dart';
 import 'story_view.dart';
-import 'stories_list_with_pressed.dart';
+import 'models/stories_list_with_pressed.dart';
 
 export 'story_image.dart';
 export 'story_video.dart';
 export 'story_controller.dart';
 export 'story_view.dart';
 
-import 'stories_data.dart';
+import 'models/stories_data.dart';
 
-class StoriesScreen extends StatefulWidget {
-  static const id = '/stories';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class GroupedStoriesView extends StatefulWidget {
+  String collectionDbName;
+
+  GroupedStoriesView({this.collectionDbName});
 
   @override
-  _StoriesScreenState createState() => _StoriesScreenState();
+  _GroupedStoriesViewState createState() => _GroupedStoriesViewState();
 }
 
-class _StoriesScreenState extends State<StoriesScreen> {
+class _GroupedStoriesViewState extends State<GroupedStoriesView> {
+  final _firestore = Firestore.instance;
   final storyController = StoryController();
   List<List<StoryItem>> storyItemList = [];
   StoriesData _storiesData = StoriesData();
@@ -47,7 +52,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
     return Scaffold(
       body: StreamBuilder(
         stream: _firestore
-            .collection('stories')
+            .collection(widget.collectionDbName)
             .document(storiesListWithPressed.pressedStoryId)
             .snapshots(),
         builder: (context, snapshot) {
@@ -74,30 +79,42 @@ class _StoriesScreenState extends State<StoriesScreen> {
                   String nextStoryId =
                       storiesListWithPressed.nextElementStoryId();
                   if (nextStoryId == null) {
-                    Navigator.popAndPushNamed(context, Home.id);
+                    Navigator.pop(context);
                   } else {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushReplacement(
                       context,
-                      StoriesScreen.id,
-                      arguments: StoriesListWithPressed(
-                          pressedStoryId: nextStoryId,
-                          storiesIdsList:
-                              storiesListWithPressed.storiesIdsList),
+                      MaterialPageRoute(
+                        builder: (context) => GroupedStoriesView(
+                          collectionDbName: widget.collectionDbName,
+                        ),
+                        settings: RouteSettings(
+                          arguments: StoriesListWithPressed(
+                              pressedStoryId: nextStoryId,
+                              storiesIdsList:
+                                  storiesListWithPressed.storiesIdsList),
+                        ),
+                      ),
                     );
                   }
                 } else {
                   String previousStoryId =
                       storiesListWithPressed.previousElementStoryId();
                   if (previousStoryId == null) {
-                    Navigator.popAndPushNamed(context, Home.id);
+                    Navigator.pop(context);
                   } else {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushReplacement(
                       context,
-                      StoriesScreen.id,
-                      arguments: StoriesListWithPressed(
-                          pressedStoryId: previousStoryId,
-                          storiesIdsList:
-                              storiesListWithPressed.storiesIdsList),
+                      MaterialPageRoute(
+                        builder: (context) => GroupedStoriesView(
+                          collectionDbName: widget.collectionDbName,
+                        ),
+                        settings: RouteSettings(
+                          arguments: StoriesListWithPressed(
+                              pressedStoryId: previousStoryId,
+                              storiesIdsList:
+                                  storiesListWithPressed.storiesIdsList),
+                        ),
+                      ),
                     );
                   }
                 }
@@ -113,14 +130,21 @@ class _StoriesScreenState extends State<StoriesScreen> {
                     String nextStoryId =
                         storiesListWithPressed.nextElementStoryId();
                     if (nextStoryId == null) {
-                      Navigator.popAndPushNamed(context, Home.id);
+                      Navigator.pop(context);
                     } else {
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushReplacement(
                         context,
-                        StoriesScreen.id,
-                        arguments: StoriesListWithPressed(
-                          pressedStoryId: nextStoryId,
-                          storiesIdsList: storiesListWithPressed.storiesIdsList,
+                        MaterialPageRoute(
+                          builder: (context) => GroupedStoriesView(
+                            collectionDbName: widget.collectionDbName,
+                          ),
+                          settings: RouteSettings(
+                            arguments: StoriesListWithPressed(
+                              pressedStoryId: nextStoryId,
+                              storiesIdsList:
+                                  storiesListWithPressed.storiesIdsList,
+                            ),
+                          ),
                         ),
                       );
                     }
@@ -128,7 +152,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                 ),
                 onVerticalDragUpdate: (details) {
                   if (details.delta.dy > 0) {
-                    Navigator.popAndPushNamed(context, Home.id);
+                    Navigator.pop(context);
                   }
                 },
               ));
@@ -138,7 +162,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
         alignment: Alignment(1.1, -0.85),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, Home.id);
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.close,

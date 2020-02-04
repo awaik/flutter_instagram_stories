@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'models/stories.dart';
+import 'stories.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_instagram_stories/story_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class StoriesData {
+  int _cacheDepth = 4;
   List<String> _storiesIdsList = [];
   List<Stories> _storyWidgets = [];
   final storyController = StoryController();
@@ -18,8 +19,8 @@ class StoriesData {
     for (var story in stories) {
       final Stories storyData = Stories.fromJson({
         'storyId': story.documentID,
-        'date':
-            Timestamp(story.data['date'].seconds, 0).toDate().toIso8601String(),
+        'date': DateTime.fromMillisecondsSinceEpoch(story.data['date'].seconds)
+            .toIso8601String(),
         'file': jsonDecode(jsonEncode(story.data['file'])),
         'title': story.data['title'],
         'previewImage': story.data['previewImage'],
@@ -31,7 +32,7 @@ class StoriesData {
         // preliminary caching
         var i = 0;
         for (var file in storyData.file) {
-          if (file.filetype == 'image' && i < K.cacheDepth) {
+          if (file.filetype == 'image' && i < _cacheDepth) {
             DefaultCacheManager().getSingleFile(file.url);
             i += 1;
           }
