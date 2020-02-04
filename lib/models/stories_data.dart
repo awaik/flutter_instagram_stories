@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:izga/src/models/stories.dart';
-import 'package:izga/src/theme/constants.dart';
+import 'models/stories.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import 'package:flutter_instagram_stories/story_view.dart';
