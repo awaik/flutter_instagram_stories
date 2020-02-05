@@ -1,6 +1,6 @@
 # story_view [![Pub](https://img.shields.io/pub/v/story_view.svg)](https://pub.dev/packages/story_view)
 
-Story view for apps with stories, awaik
+Display stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs. For now works with Firebase only.
 
 <p float="left">
   <img src="https://i.ibb.co/nqXTcTK/sv.gif" width=400 />

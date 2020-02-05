@@ -10,10 +10,20 @@ import 'models/stories_data.dart';
 import 'grouped_stories_view.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
-//  Stream<QuerySnapshot> storiesStream;
   String collectionDbName;
+  bool showTitleOnIcon = true;
+  bool showTitleInStory = true;
+  Duration duration = const Duration(seconds: 3);
+  double fontSizeIcon = 16;
+  double fontSizeStory = 24;
 
-  FlutterInstagramStories({this.collectionDbName});
+  FlutterInstagramStories(
+      {@required this.collectionDbName,
+      this.showTitleOnIcon,
+      this.showTitleInStory,
+      this.duration,
+      this.fontSizeIcon,
+      this.fontSizeStory});
 
   @override
   _FlutterInstagramStoriesState createState() =>
@@ -32,8 +42,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream:
-          Firestore.instance.collection(widget.collectionDbName).snapshots(),
+      stream: _firestore.collection(widget.collectionDbName).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return ListView.builder(
@@ -73,6 +82,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
           itemCount: storyWidgets == null ? 0 : stories.length,
           itemBuilder: (BuildContext context, int index) {
             Stories story = storyWidgets[index];
+            print(
+                '++++++++++++++++++++++++++++++++++++++++++++++++++11 ${story.title}');
 
             return Padding(
               padding: EdgeInsets.only(left: 20),
@@ -93,24 +104,29 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            story.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.white,
+                    Container(
+                      height: 178,
+                      width: 140,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 130.0, left: 8.0, right: 8.0, bottom: 8.0),
+                            child: Text(
+                              story.title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: widget.fontSizeIcon,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.left,
                             ),
-                            textAlign: TextAlign.left,
                           ),
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ]),
                 ),
