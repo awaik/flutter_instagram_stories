@@ -21,8 +21,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GroupedStoriesView extends StatefulWidget {
   String collectionDbName;
+  int imageStoryDuration;
 
-  GroupedStoriesView({this.collectionDbName});
+  GroupedStoriesView({
+    this.collectionDbName,
+    this.imageStoryDuration = 3,
+  });
 
   @override
   _GroupedStoriesViewState createState() => _GroupedStoriesViewState();
@@ -68,7 +72,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
             'snapshotData': snapshot.data,
             'pressedStoryId': storiesListWithPressed.pressedStoryId
           };
-          _storiesData.parseStories(toPass);
+          _storiesData.parseStories(toPass, widget.imageStoryDuration);
           storyItemList.add(_storiesData.storyItems);
 
           return Dismissible(

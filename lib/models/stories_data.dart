@@ -41,7 +41,10 @@ class StoriesData {
     }
   }
 
-  void parseStories(Map<String, dynamic> toPass) {
+  void parseStories(
+    Map<String, dynamic> toPass,
+    imageStoryDuration,
+  ) {
     Map<String, dynamic> temp = {
       'storyId': toPass['pressedStoryId'],
       'file': toPass['snapshotData']['file'],
@@ -56,7 +59,7 @@ class StoriesData {
         storyItems.add(StoryItem.pageGif(
           storyInsideImage.url,
           controller: storyController,
-//          duration: Duration(seconds: 3),
+          duration: Duration(seconds: imageStoryDuration),
         ));
       } else {
         storyItems.add(

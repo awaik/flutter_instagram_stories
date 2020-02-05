@@ -13,21 +13,21 @@ class FlutterInstagramStories extends StatefulWidget {
   String collectionDbName;
   bool showTitleOnIcon = true;
   bool showTitleInStory = true;
-  Duration duration = const Duration(seconds: 3);
   double fontSizeIcon = 16;
   double fontSizeStory = 24;
   double iconWidth;
   double iconHeight;
+  int imageStoryDuration;
 
   FlutterInstagramStories({
     @required this.collectionDbName,
     this.showTitleOnIcon,
     this.showTitleInStory,
-    this.duration,
     this.fontSizeIcon,
     this.fontSizeStory,
     this.iconWidth,
     this.iconHeight,
+    this.imageStoryDuration,
   });
 
   @override
@@ -147,6 +147,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                     MaterialPageRoute(
                       builder: (context) => GroupedStoriesView(
                         collectionDbName: widget.collectionDbName,
+                        imageStoryDuration: widget.imageStoryDuration,
                       ),
                       settings: RouteSettings(
                         arguments: StoriesListWithPressed(

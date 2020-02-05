@@ -9,6 +9,9 @@ import 'package:video_player/video_player.dart';
 import 'utils.dart';
 
 class VideoLoader {
+  //TODO: for now video lasts 10 seconds - add video length detection
+  //TODO: for now while downloading timer is going. Stop timer while loading, display video after first 3 seconds load.
+
   String url;
 
   File videoFile;
