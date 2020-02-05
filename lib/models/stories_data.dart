@@ -56,7 +56,7 @@ class StoriesData {
         storyItems.add(StoryItem.pageGif(
           storyInsideImage.url,
           controller: storyController,
-          duration: Duration(seconds: 10),
+//          duration: Duration(seconds: 3),
         ));
       } else {
         storyItems.add(

@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class StoriesListSkeleton extends StatelessWidget {
+  double width;
+  double height;
+
+  StoriesListSkeleton({
+    this.width = 140.0,
+    this.height = 178.0,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,8 +24,8 @@ class StoriesListSkeleton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: SkeletonAnimation(
                   child: Container(
-                    height: 178.0,
-                    width: 140.0,
+                    width: width,
+                    height: height,
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
                     ),
@@ -33,12 +41,20 @@ class StoriesListSkeleton extends StatelessWidget {
 }
 
 class StoriesListSkeletonAlone extends StatelessWidget {
+  double width;
+  double height;
+
+  StoriesListSkeletonAlone({
+    this.width = 140.0,
+    this.height = 178.0,
+  });
+
   @override
   Widget build(BuildContext context) {
     return SkeletonAnimation(
       child: Container(
-        height: 178.0,
-        width: 140.0,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           color: Colors.grey[300],
         ),

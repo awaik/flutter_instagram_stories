@@ -16,14 +16,19 @@ class FlutterInstagramStories extends StatefulWidget {
   Duration duration = const Duration(seconds: 3);
   double fontSizeIcon = 16;
   double fontSizeStory = 24;
+  double iconWidth;
+  double iconHeight;
 
-  FlutterInstagramStories(
-      {@required this.collectionDbName,
-      this.showTitleOnIcon,
-      this.showTitleInStory,
-      this.duration,
-      this.fontSizeIcon,
-      this.fontSizeStory});
+  FlutterInstagramStories({
+    @required this.collectionDbName,
+    this.showTitleOnIcon,
+    this.showTitleInStory,
+    this.duration,
+    this.fontSizeIcon,
+    this.fontSizeStory,
+    this.iconWidth,
+    this.iconHeight,
+  });
 
   @override
   _FlutterInstagramStoriesState createState() =>
@@ -54,13 +59,16 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                 padding: EdgeInsets.only(left: 20),
                 child: InkWell(
                   child: Container(
-                    height: 178,
-                    width: 140,
+                    width: widget.iconWidth,
+                    height: widget.iconHeight,
                     child: Stack(
                       children: <Widget>[
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: StoriesListSkeletonAlone(),
+                          child: StoriesListSkeletonAlone(
+                            width: widget.iconWidth,
+                            height: widget.iconHeight,
+                          ),
                         ),
                       ],
                     ),
@@ -82,31 +90,31 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
           itemCount: storyWidgets == null ? 0 : stories.length,
           itemBuilder: (BuildContext context, int index) {
             Stories story = storyWidgets[index];
-            print(
-                '++++++++++++++++++++++++++++++++++++++++++++++++++11 ${story.title}');
 
             return Padding(
               padding: EdgeInsets.only(left: 20),
               child: InkWell(
                 child: Container(
-                  height: 178,
-                  width: 140,
+                  width: widget.iconWidth,
+                  height: widget.iconHeight,
                   child: Stack(children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: CachedNetworkImage(
                         imageUrl: story.previewImage,
-                        height: 178,
-                        width: 140,
+                        width: widget.iconWidth,
+                        height: widget.iconHeight,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) =>
-                            StoriesListSkeletonAlone(),
+                        placeholder: (context, url) => StoriesListSkeletonAlone(
+                          width: widget.iconWidth,
+                          height: widget.iconHeight,
+                        ),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                     Container(
-                      height: 178,
-                      width: 140,
+                      width: widget.iconWidth,
+                      height: widget.iconHeight,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +122,10 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(
-                                top: 130.0, left: 8.0, right: 8.0, bottom: 8.0),
+                                top: (40 - widget.iconHeight) * (-1),
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 8.0),
                             child: Text(
                               story.title,
                               style: TextStyle(

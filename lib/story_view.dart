@@ -72,31 +72,33 @@ class StoryItem {
     ] /** white text */);
 
     return StoryItem(
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(roundedTop ? 8 : 0),
-              bottom: Radius.circular(roundedBottom ? 8 : 0),
-            ),
+      Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(roundedTop ? 8 : 0),
+            bottom: Radius.circular(roundedBottom ? 8 : 0),
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
-          ),
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                color: contrast > 1.8 ? Colors.white : Colors.black,
-                fontSize: fontSize,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          //color: backgroundColor,
         ),
-        shown: shown);
+        padding: EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 16,
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: contrast > 1.8 ? Colors.white : Colors.black,
+              fontSize: fontSize,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        //color: backgroundColor,
+      ),
+      shown: shown,
+      duration: duration,
+    );
   }
 
   /// Shorthand for a full-page image content.
@@ -111,52 +113,54 @@ class StoryItem {
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
-        Container(
-          color: Colors.black,
-          child: Stack(
-            children: <Widget>[
-              Center(
-                child: Image(
-                  image: image,
-                  height: double.infinity,
-                  width: double.infinity,
-                  fit: imageFit,
-                ),
+      Container(
+        color: Colors.black,
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: Image(
+                image: image,
+                height: double.infinity,
+                width: double.infinity,
+                fit: imageFit,
               ),
-              caption != null && caption.length > 0
-                  ? SafeArea(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(
-                            bottom: 24,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 8,
-                          ),
-                          color: caption != null
-                              ? Colors.black54
-                              : Colors.transparent,
-                          child: caption != null
-                              ? Text(
-                                  caption,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )
-                              : SizedBox(),
+            ),
+            caption != null && caption.length > 0
+                ? SafeArea(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(
+                          bottom: 24,
                         ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 8,
+                        ),
+                        color: caption != null
+                            ? Colors.black54
+                            : Colors.transparent,
+                        child: caption != null
+                            ? Text(
+                                caption,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            : SizedBox(),
                       ),
-                    )
-                  : Container(),
-            ],
-          ),
+                    ),
+                  )
+                : Container(),
+          ],
         ),
-        shown: shown);
+      ),
+      shown: shown,
+      duration: duration,
+    );
   }
 
   /// Shorthand for creating inline image page.
@@ -198,6 +202,7 @@ class StoryItem {
         ),
       ),
       shown: shown,
+      duration: duration,
     );
   }
 
@@ -314,13 +319,14 @@ class StoryItem {
         ),
       ),
       shown: shown,
+      duration: duration,
     );
   }
 
   static StoryItem pageVideo(
     String url, {
     StoryController controller,
-    Duration duration,
+    Duration duration = const Duration(seconds: 10),
     BoxFit imageFit = BoxFit.fitWidth,
     String caption,
     bool shown = false,
@@ -328,47 +334,47 @@ class StoryItem {
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
-        Container(
-          color: Colors.black,
-          child: Stack(
-            children: <Widget>[
-              StoryVideo.url(
-                url,
-                controller: controller,
-                requestHeaders: requestHeaders,
-              ),
-              SafeArea(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(
-                      bottom: 24,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 8,
-                    ),
-                    color:
-                        caption != null ? Colors.black54 : Colors.transparent,
-                    child: caption != null
-                        ? Text(
-                            caption,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          )
-                        : SizedBox(),
+      Container(
+        color: Colors.black,
+        child: Stack(
+          children: <Widget>[
+            StoryVideo.url(
+              url,
+              controller: controller,
+              requestHeaders: requestHeaders,
+            ),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(
+                    bottom: 24,
                   ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 8,
+                  ),
+                  color: caption != null ? Colors.black54 : Colors.transparent,
+                  child: caption != null
+                      ? Text(
+                          caption,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      : SizedBox(),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
-        shown: shown,
-        duration: duration ?? Duration(seconds: 10));
+      ),
+      shown: shown,
+      duration: duration,
+    );
   }
 }
 
