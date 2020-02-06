@@ -13,7 +13,7 @@ Plugin can be used in any app for displaying news, educational content and etc.
 
 ![Showcase|100x100, 10%](example/lib/showcase1.gif)
 
-Important notes:
+*Important notes:*
 
 1. For now plugin works with Firebase only.
 2. This is first beta version, please
@@ -41,7 +41,7 @@ import 'import 'package:flutter_instagram_stories/flutter_instagram_stories.dart
 
 ## iOS
 
-For playing video uses official video_player plugin https://pub.dev/packages/video_player
+For playing video plugin uses official video_player https://pub.dev/packages/video_player
 
 From documentation:
 
@@ -57,30 +57,70 @@ From documentation:
 
 ## Usage
 
-```dart
-  VerificationCode(
-      keyboardType: TextInputType.number,
-      length: 4,
-      autofocus: true,
-      onCompleted: (String value) {
-        //...
-        print(value);
-      },
-  )
-```
+
+You can find complete working example here https://github.com/awaik/flutter_instagram_stories/tree/master/example
+
+*Dart code*
+
+Connect to collection where you keep stories
 
 ```dart
-onEditing: (bool value) {
-  setState(() {
-    _onEditing = value;
-  });
-},
+  static String collectionDbName = 'instagram_stories_db';
+  CollectionReference dbInstance =
+      Firestore.instance.collection(collectionDbName);
 ```
 
+And add stories full functionality to your app.
+
 ```dart
-Center(
-              child: (_onEditing != true)
-                  ? Text('Your code: $_code')
-                  : Text('Please enter full code'),
-            ),
+      body: SafeArea(
+        child: FlutterInstagramStories(
+          collectionDbName: collectionDbName,
+          showTitleOnIcon: true,
+          fontSizeIcon: 16.0,
+          //TODO: showTitleInStory: true,
+          //TODO: fontSizeStory: 18.0,
+          iconWidth: 150.0,
+          iconHeight: 150.0,
+          //how long story lasts in seconds
+          imageStoryDuration: 7,
+          progressPosition: ProgressPosition.top,
+          repeat: true,
+          inline: false,
+        ),
+      ),
 ```
+
+*Firestore database*
+
+Plugin works with Firestore database and package https://pub.dev/packages/cloud_firestore already included into plugin.
+
+You can use example with open database or create your own database.
+
+Steps to create:
+
+1. Add Firebase to your app
+
+- Android https://firebase.google.com/docs/flutter/setup?platform=android
+- iOS https://firebase.google.com/docs/flutter/setup?platform=ios
+
+2. Create Firestore database
+
+- Create collection with any name. After you will use this name in dart code only once.
+- Create documents inside collection with exact structure, like on image below
+
+
+```
+    DateTime date;
+    List file[
+        String filetype;
+        String url;
+        ]
+    String title;
+    String previewImage;
+```
+
+![Showcase|100x100, 10%](example/lib/collection_structure.png)
+
+
+
