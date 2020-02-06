@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>163557874485-mp2gp8elqukuo6kldoli774ib6ipuo8p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.163557874485-mp2gp8elqukuo6kldoli774ib6ipuo8p</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>163557874485-afot62s3fbcct786rdsdjvfo4d9tp1uo.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAk0JtpQUy_IWO7kfHWLHUOO_DklcR7J6g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>163557874485</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>pro.awaik.flutter-instagram-stories-example</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-instagram-stories</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-instagram-stories.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:163557874485:ios:84acc15390f74caec6ca7c</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-instagram-stories.firebaseio.com</string>
+</dict>
+</plist>

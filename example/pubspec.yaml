@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_core: ^0.4.3+2
   cloud_firestore: ^0.13.0+1
-  firebase_storage: ^3.1.1
+#  firebase_storage: ^3.1.1
   flutter_instagram_stories:
     path: ../
 
