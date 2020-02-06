@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'models/stories.dart';
+import 'settings.dart';
 import 'models/stories_list_with_pressed.dart';
 import 'components//stories_list_skeleton.dart';
 import 'models/stories_data.dart';
 import 'grouped_stories_view.dart';
+
+export 'grouped_stories_view.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
   /// the name of collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories

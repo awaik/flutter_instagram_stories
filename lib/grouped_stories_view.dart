@@ -1,11 +1,6 @@
-import 'dart:math';
 import 'dart:ui';
-import 'dart:async';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'story_video.dart';
-import 'story_image.dart';
 import 'story_controller.dart';
 import 'story_view.dart';
 import 'models/stories_list_with_pressed.dart';
