@@ -63,125 +63,132 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: _firestore.collection(widget.collectionDbName).snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
+    return Container(
+      padding: EdgeInsets.only(top: 10, left: 0),
+      height: widget.iconHeight + 10.0,
+      width: MediaQuery.of(context).size.width,
+      child: StreamBuilder(
+        stream: _firestore.collection(widget.collectionDbName).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              primary: false,
+              itemCount: 3,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: InkWell(
+                    child: Container(
+                      width: widget.iconWidth,
+                      height: widget.iconHeight,
+                      child: Stack(
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: StoriesListSkeletonAlone(
+                              width: widget.iconWidth,
+                              height: widget.iconHeight,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+          final stories = snapshot.data.documents;
+          _storiesData.parseStoriesPreview(stories);
+          List<Stories> storyWidgets = _storiesData.storyWidgets;
+          // the variable below is for passing stories ids to screen Stories
+          List<String> storiesIdsList = _storiesData.storiesIdsList;
+
           return ListView.builder(
             scrollDirection: Axis.horizontal,
             primary: false,
-            itemCount: 3,
+            itemCount: storyWidgets == null ? 0 : stories.length,
             itemBuilder: (BuildContext context, int index) {
+              Stories story = storyWidgets[index];
+
               return Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: InkWell(
                   child: Container(
                     width: widget.iconWidth,
                     height: widget.iconHeight,
-                    child: Stack(
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: StoriesListSkeletonAlone(
+                    child: Stack(children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: CachedNetworkImage(
+                          imageUrl: story.previewImage,
+                          width: widget.iconWidth,
+                          height: widget.iconHeight,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              StoriesListSkeletonAlone(
                             width: widget.iconWidth,
                             height: widget.iconHeight,
                           ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        width: widget.iconWidth,
+                        height: widget.iconHeight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: (50 - widget.iconHeight) * (-1),
+                                  left: 8.0,
+                                  right: 8.0,
+                                  bottom: 8.0),
+                              child: Text(
+                                story.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: widget.fontSizeIcon,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GroupedStoriesView(
+                          collectionDbName: widget.collectionDbName,
+                          imageStoryDuration: widget.imageStoryDuration,
+                          progressPosition: widget.progressPosition,
+                          repeat: widget.repeat,
+                          inline: widget.inline,
+                        ),
+                        settings: RouteSettings(
+                          arguments: StoriesListWithPressed(
+                              pressedStoryId: story.storyId,
+                              storiesIdsList: storiesIdsList),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               );
             },
           );
-        }
-        final stories = snapshot.data.documents;
-        _storiesData.parseStoriesPreview(stories);
-        List<Stories> storyWidgets = _storiesData.storyWidgets;
-        // the variable below is for passing stories ids to screen Stories
-        List<String> storiesIdsList = _storiesData.storiesIdsList;
-
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          primary: false,
-          itemCount: storyWidgets == null ? 0 : stories.length,
-          itemBuilder: (BuildContext context, int index) {
-            Stories story = storyWidgets[index];
-
-            return Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: InkWell(
-                child: Container(
-                  width: widget.iconWidth,
-                  height: widget.iconHeight,
-                  child: Stack(children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: story.previewImage,
-                        width: widget.iconWidth,
-                        height: widget.iconHeight,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => StoriesListSkeletonAlone(
-                          width: widget.iconWidth,
-                          height: widget.iconHeight,
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    ),
-                    Container(
-                      width: widget.iconWidth,
-                      height: widget.iconHeight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: (50 - widget.iconHeight) * (-1),
-                                left: 8.0,
-                                right: 8.0,
-                                bottom: 8.0),
-                            child: Text(
-                              story.title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: widget.fontSizeIcon,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GroupedStoriesView(
-                        collectionDbName: widget.collectionDbName,
-                        imageStoryDuration: widget.imageStoryDuration,
-                        progressPosition: widget.progressPosition,
-                        repeat: widget.repeat,
-                        inline: widget.inline,
-                      ),
-                      settings: RouteSettings(
-                        arguments: StoriesListWithPressed(
-                            pressedStoryId: story.storyId,
-                            storiesIdsList: storiesIdsList),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        );
-      },
+        },
+      ),
     );
   }
 }
