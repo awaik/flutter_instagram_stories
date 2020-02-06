@@ -1,12 +1,10 @@
 # flutter_instagram_stories
 
-
-
 Display stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs. For now works with Firebase only.
 
-
+<p float="right">
   ![Showcase|100x100, 10%](example/lib/showcase1.gif)
-
+</p>
 
 
 This a Flutter widget to display stories just like Whatsapp and Instagram. Can also be used
