@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_instagram_stories/story_controller.dart';
 import 'story_view.dart';
 import 'package:video_player/video_player.dart';
 
@@ -24,7 +25,7 @@ class VideoLoader {
 
   void loadVideo(VoidCallback onComplete) {
     if (this.videoFile != null) {
-      this.state = LoadState.success;
+      this.state = LoadState.loading;
       onComplete();
     }
 
@@ -48,10 +49,13 @@ class StoryVideo extends StatefulWidget {
   StoryVideo(this.videoLoader, {this.storyController, Key key})
       : super(key: key ?? UniqueKey());
 
-  static StoryVideo url(String url,
-      {StoryController controller,
-      Map<String, dynamic> requestHeaders,
-      Key key}) {
+  static StoryVideo url(
+    String url, {
+    StoryController controller,
+    Map<String, dynamic> requestHeaders,
+    VoidCallback adjustDuration,
+    Key key,
+  }) {
     return StoryVideo(
       VideoLoader(url, requestHeaders: requestHeaders),
       storyController: controller,
@@ -75,33 +79,43 @@ class StoryVideoState extends State<StoryVideo> {
   @override
   void initState() {
     super.initState();
+    widget.videoLoader.loadVideo(
+      () {
+        if (widget.videoLoader.state == LoadState.success) {
+          this.playerController =
+              VideoPlayerController.file(widget.videoLoader.videoFile);
 
-    widget.storyController.pause();
-
-    widget.videoLoader.loadVideo(() {
-      if (widget.videoLoader.state == LoadState.success) {
-        this.playerController =
-            VideoPlayerController.file(widget.videoLoader.videoFile);
-
-        playerController.initialize().then((v) {
-          setState(() {});
-          widget.storyController.play();
-        });
-
-        if (widget.storyController != null) {
-          _streamSubscription =
-              widget.storyController.playbackNotifier.listen((playbackState) {
-            if (playbackState == PlaybackState.pause) {
-              playerController.pause();
-            } else {
-              playerController.play();
-            }
+          playerController.initialize().then((v) {
+            setState(() {});
+            widget.storyController.play();
           });
+
+          if (widget.storyController != null) {
+            playerController.addListener(checkIfVideoFinished);
+            _streamSubscription =
+                widget.storyController.playbackNotifier.listen((playbackState) {
+              if (playbackState == PlaybackState.pause) {
+                playerController.pause();
+              } else {
+                playerController.play();
+              }
+            });
+          }
+        } else {
+          setState(() {});
         }
-      } else {
-        setState(() {});
-      }
-    });
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
+      height: double.infinity,
+      width: double.infinity,
+      child: getContentView(),
+    );
   }
 
   Widget getContentView() {
@@ -114,7 +128,6 @@ class StoryVideoState extends State<StoryVideo> {
         ),
       );
     }
-
     return widget.videoLoader.state == LoadState.loading
         ? Center(
             child: Container(
@@ -130,25 +143,25 @@ class StoryVideoState extends State<StoryVideo> {
             child: Text(
             "Media failed to load.",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.grey,
             ),
           ));
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      height: double.infinity,
-      width: double.infinity,
-      child: getContentView(),
-    );
-  }
-
-  @override
   void dispose() {
-    playerController.dispose();
+    playerController?.dispose();
     _streamSubscription?.cancel();
     super.dispose();
+  }
+
+  void checkIfVideoFinished() {
+    print('~~~~~~~~~~~~~~ -- ${playerController.value.duration.inSeconds} ');
+    try {
+      if (playerController.value.position.inSeconds ==
+          playerController.value.duration.inSeconds) {
+        playerController.removeListener(checkIfVideoFinished);
+      }
+    } catch (e) {}
   }
 }

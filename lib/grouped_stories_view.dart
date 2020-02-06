@@ -9,11 +9,13 @@ import 'story_image.dart';
 import 'story_controller.dart';
 import 'story_view.dart';
 import 'models/stories_list_with_pressed.dart';
+import 'settings.dart';
 
 export 'story_image.dart';
 export 'story_video.dart';
 export 'story_controller.dart';
 export 'story_view.dart';
+export 'settings.dart';
 
 import 'models/stories_data.dart';
 
@@ -22,10 +24,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class GroupedStoriesView extends StatefulWidget {
   String collectionDbName;
   int imageStoryDuration;
+  ProgressPosition progressPosition;
+  bool repeat;
+  bool inline;
 
   GroupedStoriesView({
     this.collectionDbName,
     this.imageStoryDuration = 3,
+    this.progressPosition,
+    this.repeat,
+    this.inline,
   });
 
   @override
@@ -90,6 +98,10 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
                           collectionDbName: widget.collectionDbName,
+                          imageStoryDuration: widget.imageStoryDuration,
+                          progressPosition: widget.progressPosition,
+                          repeat: widget.repeat,
+                          inline: widget.inline,
                         ),
                         settings: RouteSettings(
                           arguments: StoriesListWithPressed(
@@ -111,6 +123,10 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
                           collectionDbName: widget.collectionDbName,
+                          imageStoryDuration: widget.imageStoryDuration,
+                          progressPosition: widget.progressPosition,
+                          repeat: widget.repeat,
+                          inline: widget.inline,
                         ),
                         settings: RouteSettings(
                           arguments: StoriesListWithPressed(
@@ -127,9 +143,13 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                 child: StoryView(
                   storyItemList[0],
                   controller: storyController,
+                  progressPosition: widget.progressPosition,
+                  repeat: widget.repeat,
+                  inline: widget.inline,
                   onStoryShow: (StoryItem s) {
                     _onStoryShow(s);
                   },
+                  goForward: () {},
                   onComplete: () {
                     String nextStoryId =
                         storiesListWithPressed.nextElementStoryId();
@@ -141,6 +161,10 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         MaterialPageRoute(
                           builder: (context) => GroupedStoriesView(
                             collectionDbName: widget.collectionDbName,
+                            imageStoryDuration: widget.imageStoryDuration,
+                            progressPosition: widget.progressPosition,
+                            repeat: widget.repeat,
+                            inline: widget.inline,
                           ),
                           settings: RouteSettings(
                             arguments: StoriesListWithPressed(

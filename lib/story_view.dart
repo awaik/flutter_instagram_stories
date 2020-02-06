@@ -7,23 +7,17 @@ import 'package:flutter/material.dart';
 import 'story_video.dart';
 import 'story_image.dart';
 import 'story_controller.dart';
+import 'settings.dart';
 
 export 'story_image.dart';
 export 'story_video.dart';
 export 'story_controller.dart';
 
-/// Indicates where the progress indicators should be placed.
-enum ProgressPosition { top, bottom }
-
-/// This is used to specify the height of the progress indicator. Inline stories
-/// should use [small]
-enum IndicatorHeight { small, large }
-
 /// This is a representation of a story item (or page).
 class StoryItem {
   /// Specifies how long the page should be displayed. It should be a reasonable
   /// amount of time greater than 0 milliseconds.
-  final Duration duration;
+  Duration duration;
 
   /// Has this page been shown already? This is used to indicate that the page
   /// has been displayed. If some pages are supposed to be skipped in a story,
@@ -326,6 +320,7 @@ class StoryItem {
   static StoryItem pageVideo(
     String url, {
     StoryController controller,
+    //TODO: adjust duration to video length
     Duration duration = const Duration(seconds: 10),
     BoxFit imageFit = BoxFit.fitWidth,
     String caption,
@@ -389,6 +384,9 @@ class StoryView extends StatefulWidget {
   /// each time the full story completes when [repeat] is set to `true`.
   final VoidCallback onComplete;
 
+  ///awaik
+  final VoidCallback goForward;
+
   /// Callback for when a story is currently being shown.
   final ValueChanged<StoryItem> onStoryShow;
 
@@ -409,6 +407,7 @@ class StoryView extends StatefulWidget {
     this.storyItems, {
     this.controller,
     this.onComplete,
+    this.goForward,
     this.onStoryShow,
     this.progressPosition = ProgressPosition.top,
     this.repeat = false,

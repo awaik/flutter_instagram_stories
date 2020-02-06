@@ -10,24 +10,39 @@ import 'models/stories_data.dart';
 import 'grouped_stories_view.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
+  /// the name of collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
   String collectionDbName;
+
+  ///
   bool showTitleOnIcon = true;
-  bool showTitleInStory = true;
   double fontSizeIcon = 16;
-  double fontSizeStory = 24;
+
+  /// size of icons on the line
   double iconWidth;
   double iconHeight;
+
+  /// how long story lasts
   int imageStoryDuration;
+
+  ProgressPosition progressPosition;
+  bool repeat;
+  bool inline;
+
+  //double fontSizeStory = 24;
+  //bool showTitleInStory = true;
 
   FlutterInstagramStories({
     @required this.collectionDbName,
     this.showTitleOnIcon,
-    this.showTitleInStory,
     this.fontSizeIcon,
-    this.fontSizeStory,
     this.iconWidth,
     this.iconHeight,
     this.imageStoryDuration,
+    this.progressPosition = ProgressPosition.top,
+    this.repeat = true,
+    this.inline = false,
+    //this.fontSizeStory,
+    //this.showTitleInStory,
   });
 
   @override
@@ -122,7 +137,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(
-                                top: (40 - widget.iconHeight) * (-1),
+                                top: (50 - widget.iconHeight) * (-1),
                                 left: 8.0,
                                 right: 8.0,
                                 bottom: 8.0),
@@ -148,6 +163,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                       builder: (context) => GroupedStoriesView(
                         collectionDbName: widget.collectionDbName,
                         imageStoryDuration: widget.imageStoryDuration,
+                        progressPosition: widget.progressPosition,
+                        repeat: widget.repeat,
+                        inline: widget.inline,
                       ),
                       settings: RouteSettings(
                         arguments: StoriesListWithPressed(

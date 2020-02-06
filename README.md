@@ -1,10 +1,12 @@
-# story_view [![Pub](https://img.shields.io/pub/v/story_view.svg)](https://pub.dev/packages/story_view)
+# flutter_instagram_stories
+
+
 
 Display stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs. For now works with Firebase only.
 
-<p float="left">
-  <img src="https://i.ibb.co/nqXTcTK/sv.gif" width=400 />
-</p>
+
+  ![Showcase|100x100, 10%](example/lib/showcase1.gif)
+
 
 
 This a Flutter widget to display stories just like Whatsapp and Instagram. Can also be used
@@ -27,6 +29,24 @@ And useful callback to perform meta functionalities.
 # Installation
 
 To use this plugin, add `story_view` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+
+## iOS
+
+For playing video uses official video_player plugin https://pub.dev/packages/video_player
+
+From documentation:
+
+1.  Warning: The video_player plugin doesn’t work on iOS simulators. You must test videos on real iOS devices.
+
+2. For iOS, add the following to the Info.plist file found at <project root>/ios/Runner/Info.plist.
+
+	<key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+
+
 
 # Usage
 
