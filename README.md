@@ -122,5 +122,7 @@ Steps to create:
 
 ![Showcase|100x100, 10%](example/lib/collection_structure.png)
 
+That's it! Now your app has instagram like stories with caching and other powerful features.
+
 
 
