@@ -2,9 +2,11 @@
 
 * BREAKING CHANGE.
   1. Added multilanguage support for preview images title.
-  2. For future changes added multilanguage fields to stories.
-* Changed example
-* Changed documentation
+  2. For future changes, added multilanguage fields to stories.
+* Add option iconImageBorderRadius - set roundness of the preview images
+* Add option iconImageBorderRadius - set style of the preview images
+* Change example
+* Change documentation
 
 
 ## 0.0.1+1

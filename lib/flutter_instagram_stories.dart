@@ -16,13 +16,13 @@ class FlutterInstagramStories extends StatefulWidget {
   String collectionDbName;
   String languageCode;
 
-  ///
-  bool showTitleOnIcon = true;
-  double fontSizeIcon = 16;
-
-  /// size of icons on the line
+  /// preview images settings
   double iconWidth;
   double iconHeight;
+  bool showTitleOnIcon = true;
+  TextStyle iconTextStyle;
+  BoxDecoration iconBoxDecoration;
+  BorderRadius iconImageBorderRadius;
 
   /// how long story lasts
   int imageStoryDuration;
@@ -31,23 +31,19 @@ class FlutterInstagramStories extends StatefulWidget {
   bool repeat;
   bool inline;
 
-  //double fontSizeStory = 24;
-  //bool showTitleInStory = true;
-
   FlutterInstagramStories(
       {@required this.collectionDbName,
-      this.showTitleOnIcon,
-      this.fontSizeIcon,
       this.iconWidth,
       this.iconHeight,
+      this.showTitleOnIcon,
+      this.iconTextStyle,
+      this.iconBoxDecoration,
+      this.iconImageBorderRadius,
       this.imageStoryDuration,
       this.progressPosition = ProgressPosition.top,
       this.repeat = true,
       this.inline = false,
-      this.languageCode = 'en'
-      //this.fontSizeStory,
-      //this.showTitleInStory,
-      });
+      this.languageCode = 'en'});
 
   @override
   _FlutterInstagramStoriesState createState() =>
@@ -66,9 +62,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10, left: 0),
-      height: widget.iconHeight + 10.0,
-      width: MediaQuery.of(context).size.width,
+      color: Colors.white,
+      height: widget.iconHeight + 24,
       child: StreamBuilder(
         stream: _firestore.collection(widget.collectionDbName).snapshots(),
         builder: (context, snapshot) {
@@ -102,8 +97,6 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             );
           }
           final stories = snapshot.data.documents;
-          print(
-              '++++++++++++++++++++++++++++++++++++++++++++++++++22222 ${stories[0]}');
           _storiesData.parseStoriesPreview(stories);
           List<Stories> storyWidgets = _storiesData.storyWidgets;
           // the variable below is for passing stories ids to screen Stories
@@ -115,80 +108,53 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             itemCount: storyWidgets == null ? 0 : stories.length,
             itemBuilder: (BuildContext context, int index) {
               Stories story = storyWidgets[index];
-              print(
-                  '++++++++++++++++++++++++++++++++++++++++++++++++++11 ${story.toJson()}');
+              story.previewTitle.putIfAbsent(widget.languageCode, () => '');
 
               return Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: InkWell(
-                  child: Container(
-                    width: widget.iconWidth,
-                    height: widget.iconHeight,
-                    child: Stack(children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: story.previewImage,
-                          width: widget.iconWidth,
-                          height: widget.iconHeight,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              StoriesListSkeletonAlone(
-                            width: widget.iconWidth,
-                            height: widget.iconHeight,
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                      ),
-                      Container(
+                padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
+                child: Container(
+                  decoration: widget.iconBoxDecoration,
+                  width: widget.iconWidth,
+                  height: widget.iconHeight,
+                  child: Stack(children: <Widget>[
+                    ClipRRect(
+                      borderRadius: widget.iconImageBorderRadius,
+                      child: CachedNetworkImage(
+                        imageUrl: story.previewImage,
                         width: widget.iconWidth,
                         height: widget.iconHeight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: (50 - widget.iconHeight) * (-1),
-                                  left: 8.0,
-                                  right: 8.0,
-                                  bottom: 8.0),
-                              child: Text(
-                                story.previewTitle[widget.languageCode],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: widget.fontSizeIcon,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => StoriesListSkeletonAlone(
+                          width: widget.iconWidth,
+                          height: widget.iconHeight,
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                    Container(
+                      width: widget.iconWidth,
+                      height: widget.iconHeight,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: (50 - widget.iconHeight) * (-1),
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 8.0),
+                            child: Text(
+                              story.previewTitle[widget.languageCode],
+                              style: widget.iconTextStyle,
+                              textAlign: TextAlign.left,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ]),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GroupedStoriesView(
-                          collectionDbName: widget.collectionDbName,
-                          imageStoryDuration: widget.imageStoryDuration,
-                          progressPosition: widget.progressPosition,
-                          repeat: widget.repeat,
-                          inline: widget.inline,
-                        ),
-                        settings: RouteSettings(
-                          arguments: StoriesListWithPressed(
-                              pressedStoryId: story.storyId,
-                              storiesIdsList: storiesIdsList),
-                        ),
-                      ),
-                    );
-                  },
+                    ),
+                  ]),
                 ),
               );
             },

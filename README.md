@@ -72,23 +72,37 @@ Connect to collection where you keep stories
 And add stories full functionality to your app.
 
 ```dart
-      body: SafeArea(
-        child: FlutterInstagramStories(
-          collectionDbName: collectionDbName,
-          showTitleOnIcon: true,
-          fontSizeIcon: 16.0,
-          //TODO: showTitleInStory: true,
-          //TODO: fontSizeStory: 18.0,
-          iconWidth: 150.0,
-          iconHeight: 150.0,
-          //how long story lasts in seconds
-          imageStoryDuration: 7,
-          progressPosition: ProgressPosition.top,
-          repeat: true,
-          inline: false,
-          languageCode: 'en',
-        ),
+    FlutterInstagramStories(
+      collectionDbName: collectionDbName,
+      showTitleOnIcon: true,
+      iconTextStyle: TextStyle(
+        fontSize: 14.0,
+        color: Colors.white,
       ),
+      iconImageBorderRadius: BorderRadius.circular(15.0),
+      iconBoxDecoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        color: Color(0xFFffffff),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xff333333),
+            blurRadius: 10.0,
+            offset: Offset(
+              0.0,
+              4.0,
+            ),
+          ),
+        ],
+      ),
+      iconWidth: 150.0,
+      iconHeight: 150.0,
+      //how long story lasts in seconds
+      imageStoryDuration: 7,
+      progressPosition: ProgressPosition.top,
+      repeat: true,
+      inline: false,
+      languageCode: 'en',
+    ),
 ```
 
 *Firestore database*
@@ -112,12 +126,15 @@ Steps to create:
 
 ```
     DateTime date;
-    List file[
-        String filetype;
-        String url;
-        ]
+    List file
+       // for example
+       // [{String filetype, String url}
+       //  {String filetype, String url}
+       //  ...]
     String previewImage;
-    Map["en": someText, "anyLangCode": someText]
+    Map previewTitle
+       // for example
+       // {"en": someText, "anyLangCode": someText}
 ```
 
 ![Showcase|100x100, 10%](example/lib/collection_structure.png)
