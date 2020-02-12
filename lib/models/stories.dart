@@ -8,10 +8,15 @@ class Stories {
   String storyId;
   DateTime date;
   List<StoryData> file;
-  String title;
   String previewImage;
+  Map<String, String> previewTitle;
 
-  Stories({this.storyId, this.date, this.file, this.title, this.previewImage});
+  Stories(
+      {this.storyId,
+      this.date,
+      this.file,
+      this.previewImage,
+      this.previewTitle});
 
   factory Stories.fromJson(Map<String, dynamic> json) =>
       _$StoriesFromJson(json);

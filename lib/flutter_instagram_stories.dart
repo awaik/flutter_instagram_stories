@@ -14,6 +14,7 @@ export 'grouped_stories_view.dart';
 class FlutterInstagramStories extends StatefulWidget {
   /// the name of collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
   String collectionDbName;
+  String languageCode;
 
   ///
   bool showTitleOnIcon = true;
@@ -33,19 +34,20 @@ class FlutterInstagramStories extends StatefulWidget {
   //double fontSizeStory = 24;
   //bool showTitleInStory = true;
 
-  FlutterInstagramStories({
-    @required this.collectionDbName,
-    this.showTitleOnIcon,
-    this.fontSizeIcon,
-    this.iconWidth,
-    this.iconHeight,
-    this.imageStoryDuration,
-    this.progressPosition = ProgressPosition.top,
-    this.repeat = true,
-    this.inline = false,
-    //this.fontSizeStory,
-    //this.showTitleInStory,
-  });
+  FlutterInstagramStories(
+      {@required this.collectionDbName,
+      this.showTitleOnIcon,
+      this.fontSizeIcon,
+      this.iconWidth,
+      this.iconHeight,
+      this.imageStoryDuration,
+      this.progressPosition = ProgressPosition.top,
+      this.repeat = true,
+      this.inline = false,
+      this.languageCode = 'en'
+      //this.fontSizeStory,
+      //this.showTitleInStory,
+      });
 
   @override
   _FlutterInstagramStoriesState createState() =>
@@ -100,6 +102,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             );
           }
           final stories = snapshot.data.documents;
+          print(
+              '++++++++++++++++++++++++++++++++++++++++++++++++++22222 ${stories[0]}');
           _storiesData.parseStoriesPreview(stories);
           List<Stories> storyWidgets = _storiesData.storyWidgets;
           // the variable below is for passing stories ids to screen Stories
@@ -111,6 +115,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             itemCount: storyWidgets == null ? 0 : stories.length,
             itemBuilder: (BuildContext context, int index) {
               Stories story = storyWidgets[index];
+              print(
+                  '++++++++++++++++++++++++++++++++++++++++++++++++++11 ${story.toJson()}');
 
               return Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -150,7 +156,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                                   right: 8.0,
                                   bottom: 8.0),
                               child: Text(
-                                story.title,
+                                story.previewTitle[widget.languageCode],
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: widget.fontSizeIcon,

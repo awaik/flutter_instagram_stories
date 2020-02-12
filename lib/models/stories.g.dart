@@ -14,8 +14,10 @@ Stories _$StoriesFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : StoryData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    title: json['title'] as String,
     previewImage: json['previewImage'] as String,
+    previewTitle: (json['previewTitle'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
   );
 }
 
@@ -23,6 +25,6 @@ Map<String, dynamic> _$StoriesToJson(Stories instance) => <String, dynamic>{
       'storyId': instance.storyId,
       'date': instance.date?.toIso8601String(),
       'file': instance.file?.map((e) => e?.toJson())?.toList(),
-      'title': instance.title,
       'previewImage': instance.previewImage,
+      'previewTitle': instance.previewTitle,
     };

@@ -22,8 +22,8 @@ class StoriesData {
         'date': DateTime.fromMillisecondsSinceEpoch(story.data['date'].seconds)
             .toIso8601String(),
         'file': jsonDecode(jsonEncode(story.data['file'])),
-        'title': story.data['title'],
         'previewImage': story.data['previewImage'],
+        'previewTitle': jsonDecode(jsonEncode(story.data['previewTitle'])),
       });
       if (storyData.file != null) {
         _storyWidgets.add(storyData);

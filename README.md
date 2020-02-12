@@ -23,12 +23,13 @@ Plugin can be used in any app for displaying news, educational content and etc.
 * Display images, gifs, videos
 * Adjustable titles on icons
 * Preliminary caching after app started
+* Mutilanguage support
 
 ## Installing
 
 ```yaml
 dependencies:
-  flutter_instagram_stories: ^0.0.1+1
+  flutter_instagram_stories: ^0.1.0
 ```
 
 Now in your Dart code, you can use:
@@ -85,6 +86,7 @@ And add stories full functionality to your app.
           progressPosition: ProgressPosition.top,
           repeat: true,
           inline: false,
+          languageCode: 'en',
         ),
       ),
 ```
@@ -93,7 +95,7 @@ And add stories full functionality to your app.
 
 Plugin works with Firestore database and package https://pub.dev/packages/cloud_firestore already included into plugin.
 
-You can use example with open database or create your own database.
+You can use example with sample database in example folder or create your own database.
 
 Steps to create:
 
@@ -114,8 +116,8 @@ Steps to create:
         String filetype;
         String url;
         ]
-    String title;
     String previewImage;
+    Map["en": someText, "anyLangCode": someText]
 ```
 
 ![Showcase|100x100, 10%](example/lib/collection_structure.png)
