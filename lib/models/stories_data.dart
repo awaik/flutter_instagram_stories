@@ -8,14 +8,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 class StoriesData {
   int _cacheDepth = 4;
   List<String> _storiesIdsList = [];
-  List<Stories> _storyWidgets = [];
+
   final storyController = StoryController();
   List<StoryItem> storyItems = [];
 
   List<String> get storiesIdsList => _storiesIdsList;
-  List<Stories> get storyWidgets => _storyWidgets;
 
-  void parseStoriesPreview(var stories) {
+  List<Stories> parseStoriesPreview(var stories) {
+    List<Stories> storyWidgets = [];
+    print(
+        '++++++++++++++++++++++++++++++++++++++++++++++++++666 ${stories.length}');
     for (var story in stories) {
       final Stories storyData = Stories.fromJson({
         'storyId': story.documentID,
@@ -26,10 +28,10 @@ class StoriesData {
         'previewTitle': jsonDecode(jsonEncode(story.data['previewTitle'])),
       });
       if (storyData.file != null) {
-        _storyWidgets.add(storyData);
+        storyWidgets.add(storyData);
         _storiesIdsList.add(story.documentID);
 
-        // preliminary caching
+//         preliminary caching
         var i = 0;
         for (var file in storyData.file) {
           if (file.filetype == 'image' && i < _cacheDepth) {
@@ -39,6 +41,9 @@ class StoriesData {
         }
       }
     }
+    print(
+        '++++++++++++++++++++++++++++++++++++++++++++++++++9999888 ${storyWidgets.length}');
+    return storyWidgets;
   }
 
   void parseStories(

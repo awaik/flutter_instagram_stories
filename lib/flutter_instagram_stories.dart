@@ -82,7 +82,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                       child: Stack(
                         children: <Widget>[
                           ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: widget.iconImageBorderRadius,
                             child: StoriesListSkeletonAlone(
                               width: widget.iconWidth,
                               height: widget.iconHeight,
@@ -97,10 +97,12 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             );
           }
           final stories = snapshot.data.documents;
-          _storiesData.parseStoriesPreview(stories);
-          List<Stories> storyWidgets = _storiesData.storyWidgets;
+
+          final List<Stories> storyWidgets =
+              _storiesData.parseStoriesPreview(stories);
+
           // the variable below is for passing stories ids to screen Stories
-          List<String> storiesIdsList = _storiesData.storiesIdsList;
+          final List<String> storiesIdsList = _storiesData.storiesIdsList;
 
           return ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -112,49 +114,72 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
 
               return Padding(
                 padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
-                child: Container(
-                  decoration: widget.iconBoxDecoration,
-                  width: widget.iconWidth,
-                  height: widget.iconHeight,
-                  child: Stack(children: <Widget>[
-                    ClipRRect(
-                      borderRadius: widget.iconImageBorderRadius,
-                      child: CachedNetworkImage(
-                        imageUrl: story.previewImage,
-                        width: widget.iconWidth,
-                        height: widget.iconHeight,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => StoriesListSkeletonAlone(
+                child: InkWell(
+                  child: Container(
+                    decoration: widget.iconBoxDecoration,
+                    width: widget.iconWidth,
+                    height: widget.iconHeight,
+                    child: Stack(children: <Widget>[
+                      ClipRRect(
+                        borderRadius: widget.iconImageBorderRadius,
+                        child: CachedNetworkImage(
+                          imageUrl: story.previewImage,
                           width: widget.iconWidth,
                           height: widget.iconHeight,
-                        ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    ),
-                    Container(
-                      width: widget.iconWidth,
-                      height: widget.iconHeight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: (50 - widget.iconHeight) * (-1),
-                                left: 8.0,
-                                right: 8.0,
-                                bottom: 8.0),
-                            child: Text(
-                              story.previewTitle[widget.languageCode],
-                              style: widget.iconTextStyle,
-                              textAlign: TextAlign.left,
-                            ),
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              StoriesListSkeletonAlone(
+                            width: widget.iconWidth,
+                            height: widget.iconHeight,
                           ),
-                        ],
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
                       ),
-                    ),
-                  ]),
+                      Container(
+                        width: widget.iconWidth,
+                        height: widget.iconHeight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: (50 - widget.iconHeight) * (-1),
+                                  left: 8.0,
+                                  right: 8.0,
+                                  bottom: 8.0),
+                              child: Text(
+                                story.previewTitle[widget.languageCode],
+                                style: widget.iconTextStyle,
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GroupedStoriesView(
+                          collectionDbName: widget.collectionDbName,
+                          imageStoryDuration: widget.imageStoryDuration,
+                          progressPosition: widget.progressPosition,
+                          repeat: widget.repeat,
+                          inline: widget.inline,
+                        ),
+                        settings: RouteSettings(
+                          arguments: StoriesListWithPressed(
+                              pressedStoryId: story.storyId,
+                              storiesIdsList: storiesIdsList),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               );
             },

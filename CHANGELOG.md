@@ -1,3 +1,8 @@
+## 0.1.0+1
+
+* Fixed bug with stories opening.
+* Improved README.MD
+
 ## 0.1.0
 
 * BREAKING CHANGE.

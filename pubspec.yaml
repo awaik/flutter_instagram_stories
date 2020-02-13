@@ -1,7 +1,7 @@
 name: flutter_instagram_stories
 homepage: https://github.com/awaik/flutter_instagram_stories
 description: Display stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs. For now works with Firestore database only.
-version: 0.1.0
+version: 0.1.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
