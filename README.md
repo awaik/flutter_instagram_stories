@@ -1,4 +1,6 @@
-flutter_instagram_stories
+# flutter_instagram_stories [![Pub](https://img.shields.io/pub/v/flutter_instagram_stories.svg)](https://pub.dev/packages/flutter_instagram_stories)
+
+
 A Flutter plugin for displaying stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs.
 
 Plugin can be used in any app for displaying news, educational content and etc.
