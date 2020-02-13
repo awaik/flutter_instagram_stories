@@ -16,8 +16,6 @@ class StoriesData {
 
   List<Stories> parseStoriesPreview(var stories) {
     List<Stories> storyWidgets = [];
-    print(
-        '++++++++++++++++++++++++++++++++++++++++++++++++++666 ${stories.length}');
     for (var story in stories) {
       final Stories storyData = Stories.fromJson({
         'storyId': story.documentID,
@@ -41,8 +39,6 @@ class StoriesData {
         }
       }
     }
-    print(
-        '++++++++++++++++++++++++++++++++++++++++++++++++++9999888 ${storyWidgets.length}');
     return storyWidgets;
   }
 
