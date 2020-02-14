@@ -23,6 +23,7 @@ class FlutterInstagramStories extends StatefulWidget {
   TextStyle iconTextStyle;
   BoxDecoration iconBoxDecoration;
   BorderRadius iconImageBorderRadius;
+  EdgeInsets textInIconPadding;
 
   /// how long story lasts
   int imageStoryDuration;
@@ -39,6 +40,8 @@ class FlutterInstagramStories extends StatefulWidget {
       this.iconTextStyle,
       this.iconBoxDecoration,
       this.iconImageBorderRadius,
+      this.textInIconPadding =
+          const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       this.imageStoryDuration,
       this.progressPosition = ProgressPosition.top,
       this.repeat = true,
@@ -74,7 +77,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
               itemCount: 3,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
                   child: InkWell(
                     child: Container(
                       width: widget.iconWidth,
@@ -145,11 +148,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: (50 - widget.iconHeight) * (-1),
-                                  left: 8.0,
-                                  right: 8.0,
-                                  bottom: 8.0),
+                              padding: widget.textInIconPadding,
                               child: Text(
                                 story.previewTitle[widget.languageCode],
                                 style: widget.iconTextStyle,
