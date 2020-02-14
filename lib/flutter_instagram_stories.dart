@@ -54,12 +54,18 @@ class FlutterInstagramStories extends StatefulWidget {
 }
 
 class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
-  final _storiesData = StoriesData();
+  StoriesData _storiesData;
   final _firestore = Firestore.instance;
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _storiesData = StoriesData(languageCode: widget.languageCode);
+    super.initState();
   }
 
   @override
@@ -166,6 +172,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
                           collectionDbName: widget.collectionDbName,
+                          languageCode: widget.languageCode,
                           imageStoryDuration: widget.imageStoryDuration,
                           progressPosition: widget.progressPosition,
                           repeat: widget.repeat,

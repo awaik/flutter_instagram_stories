@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Add multilanguage support for images inside story, database structure have changed
+
 ## 0.1.0+3
 
 * Add option textInIconPadding

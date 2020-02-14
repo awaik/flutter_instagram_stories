@@ -6,6 +6,10 @@ import 'package:flutter_instagram_stories/story_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class StoriesData {
+  String languageCode;
+
+  StoriesData({this.languageCode});
+
   int _cacheDepth = 4;
   List<String> _storiesIdsList = [];
 
@@ -33,7 +37,7 @@ class StoriesData {
         var i = 0;
         for (var file in storyData.file) {
           if (file.filetype == 'image' && i < _cacheDepth) {
-            DefaultCacheManager().getSingleFile(file.url);
+            DefaultCacheManager().getSingleFile(file.url[languageCode]);
             i += 1;
           }
         }
@@ -56,23 +60,25 @@ class StoriesData {
     var storyImage;
     stories.file.asMap().forEach((index, storyInsideImage) {
       if (storyInsideImage.filetype != 'video') {
-        storyImage = CachedNetworkImageProvider(storyInsideImage.url);
+        storyImage =
+            CachedNetworkImageProvider(storyInsideImage.url[languageCode]);
         storyItems.add(StoryItem.pageGif(
-          storyInsideImage.url,
+          storyInsideImage.url[languageCode],
           controller: storyController,
           duration: Duration(seconds: imageStoryDuration),
         ));
       } else {
         storyItems.add(
           StoryItem.pageVideo(
-            storyInsideImage.url,
+            storyInsideImage.url[languageCode],
             controller: storyController,
           ),
         );
       }
       // cache images inside story
       if (index < stories.file.length - 1) {
-        DefaultCacheManager().getSingleFile(stories.file[index + 1].url);
+        DefaultCacheManager()
+            .getSingleFile(stories.file[index + 1].url[languageCode]);
       }
     });
   }

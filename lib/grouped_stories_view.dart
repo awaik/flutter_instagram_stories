@@ -18,6 +18,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GroupedStoriesView extends StatefulWidget {
   String collectionDbName;
+  String languageCode;
   int imageStoryDuration;
   ProgressPosition progressPosition;
   bool repeat;
@@ -25,6 +26,7 @@ class GroupedStoriesView extends StatefulWidget {
 
   GroupedStoriesView({
     this.collectionDbName,
+    this.languageCode,
     this.imageStoryDuration = 3,
     this.progressPosition,
     this.repeat,
@@ -39,7 +41,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   final _firestore = Firestore.instance;
   final storyController = StoryController();
   List<List<StoryItem>> storyItemList = [];
-  StoriesData _storiesData = StoriesData();
+  StoriesData _storiesData;
 
   @override
   void dispose() {
@@ -49,6 +51,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
 
   @override
   void initState() {
+    _storiesData = StoriesData(languageCode: widget.languageCode);
     super.initState();
   }
 
@@ -93,6 +96,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
                           collectionDbName: widget.collectionDbName,
+                          languageCode: widget.languageCode,
                           imageStoryDuration: widget.imageStoryDuration,
                           progressPosition: widget.progressPosition,
                           repeat: widget.repeat,
@@ -118,6 +122,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
                           collectionDbName: widget.collectionDbName,
+                          languageCode: widget.languageCode,
                           imageStoryDuration: widget.imageStoryDuration,
                           progressPosition: widget.progressPosition,
                           repeat: widget.repeat,
@@ -156,6 +161,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         MaterialPageRoute(
                           builder: (context) => GroupedStoriesView(
                             collectionDbName: widget.collectionDbName,
+                            languageCode: widget.languageCode,
                             imageStoryDuration: widget.imageStoryDuration,
                             progressPosition: widget.progressPosition,
                             repeat: widget.repeat,
