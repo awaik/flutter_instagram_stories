@@ -1,10 +1,20 @@
+## 0.1.2
+
+* Add VoidCallback `backFromStories`. This create event when user closed stories screen. Find details in the example.
+* Add option for styling close button. Find details in the example.
+```
+  /// stories close button style
+  Icon closeButtonIcon;
+  Color closeButtonBackgroundColor;
+```
+
 ## 0.1.1
 
-* Add multilanguage support for images inside story, database structure have changed
+* BREAKING CHANGE. Add multilanguage support for images inside story, database structure have changed
 
 ## 0.1.0+3
 
-* Add option textInIconPadding
+* Add option `textInIconPadding`
 * Improved preview skeleton during loading
 
 ## 0.1.0+2
@@ -22,8 +32,8 @@
 * BREAKING CHANGE.
   1. Added multilanguage support for preview images title.
   2. For future changes, added multilanguage fields to stories.
-* Add option iconImageBorderRadius - set roundness of the preview images
-* Add option iconBoxDecoration - set style of the preview images
+* Add option `iconImageBorderRadius` - set roundness of the preview images
+* Add option `iconBoxDecoration` - set style of the preview images
 * Change example
 * Change documentation
 

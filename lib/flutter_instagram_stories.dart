@@ -28,6 +28,13 @@ class FlutterInstagramStories extends StatefulWidget {
   /// how long story lasts
   int imageStoryDuration;
 
+  /// stories close button style
+  Icon closeButtonIcon;
+  Color closeButtonBackgroundColor;
+
+  /// callback to get data that stories screen was opened
+  VoidCallback backFromStories;
+
   ProgressPosition progressPosition;
   bool repeat;
   bool inline;
@@ -43,6 +50,9 @@ class FlutterInstagramStories extends StatefulWidget {
       this.textInIconPadding =
           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       this.imageStoryDuration,
+      this.closeButtonIcon,
+      this.closeButtonBackgroundColor,
+      this.backFromStories,
       this.progressPosition = ProgressPosition.top,
       this.repeat = true,
       this.inline = false,
@@ -166,8 +176,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                       ),
                     ]),
                   ),
-                  onTap: () {
-                    Navigator.push(
+                  onTap: () async {
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
@@ -177,6 +187,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                           progressPosition: widget.progressPosition,
                           repeat: widget.repeat,
                           inline: widget.inline,
+                          closeButtonIcon: widget.closeButtonIcon,
+                          closeButtonBackgroudColor:
+                              widget.closeButtonBackgroundColor,
                         ),
                         settings: RouteSettings(
                           arguments: StoriesListWithPressed(
@@ -185,6 +198,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         ),
                       ),
                     );
+                    if (result == 'back_from_stories_view') {
+                      widget.backFromStories();
+                    }
                   },
                 ),
               );

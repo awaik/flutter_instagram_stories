@@ -65,8 +65,8 @@ You can find complete working example here https://github.com/awaik/flutter_inst
 Connect to collection where you keep stories
 
 ```dart
-  static String collectionDbName = 'instagram_stories_db';
-  CollectionReference dbInstance =
+    static String collectionDbName = 'instagram_stories_db';
+    CollectionReference dbInstance =
       Firestore.instance.collection(collectionDbName);
 ```
 
@@ -74,36 +74,47 @@ And add stories full functionality to your app.
 
 ```dart
     FlutterInstagramStories(
-      collectionDbName: collectionDbName,
-      showTitleOnIcon: true,
-      iconTextStyle: TextStyle(
-        fontSize: 14.0,
-        color: Colors.white,
-      ),
-      iconImageBorderRadius: BorderRadius.circular(15.0),
-      iconBoxDecoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-        color: Color(0xFFffffff),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xff333333),
-            blurRadius: 10.0,
-            offset: Offset(
-              0.0,
-              4.0,
+        collectionDbName: collectionDbName,
+        showTitleOnIcon: true,
+        backFromStories: () {
+          _backFromStoriesAlert();
+        },
+        iconTextStyle: TextStyle(
+          fontSize: 14.0,
+          color: Colors.white,
+        ),
+        iconImageBorderRadius: BorderRadius.circular(15.0),
+        iconBoxDecoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          color: Color(0xFFffffff),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xff333333),
+              blurRadius: 10.0,
+              offset: Offset(
+                0.0,
+                4.0,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        iconWidth: 150.0,
+        iconHeight: 150.0,
+        textInIconPadding:
+            EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
+        //how long story lasts in seconds
+        imageStoryDuration: 7,
+        progressPosition: ProgressPosition.top,
+        repeat: true,
+        inline: false,
+        languageCode: 'en',
+        closeButtonIcon: Icon(
+          Icons.close,
+          color: Colors.blueGrey,
+          size: 28.0,
+        ),
+        closeButtonBackgroundColor: Color(0x00ffffff),
       ),
-      iconWidth: 150.0,
-      iconHeight: 150.0,
-      //how long story lasts in seconds
-      imageStoryDuration: 7,
-      progressPosition: ProgressPosition.top,
-      repeat: true,
-      inline: false,
-      languageCode: 'en',
-    ),
 ```
 
 *Firestore database*

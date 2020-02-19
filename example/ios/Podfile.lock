@@ -176,16 +176,10 @@ PODS:
   - Firebase/Firestore (6.16.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 1.10.0)
-  - Firebase/Storage (6.16.0):
-    - Firebase/CoreOnly
-    - FirebaseStorage (~> 3.5.0)
   - firebase_core (0.0.1):
     - Firebase/Core
     - Flutter
   - firebase_core_web (0.1.0):
-    - Flutter
-  - firebase_storage (0.0.1):
-    - Firebase/Storage
     - Flutter
   - FirebaseAnalytics (6.2.2):
     - FirebaseCore (~> 6.6)
@@ -231,10 +225,6 @@ PODS:
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
-  - FirebaseStorage (3.5.0):
-    - FirebaseAuthInterop (~> 1.0)
-    - FirebaseCore (~> 6.0)
-    - GTMSessionFetcher/Core (~> 1.1)
   - Flutter (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -283,7 +273,6 @@ PODS:
     - gRPC-Core/Interface (= 1.21.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
-  - GTMSessionFetcher/Core (1.3.1)
   - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -305,7 +294,6 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
-  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -325,7 +313,6 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseInstanceID
-    - FirebaseStorage
     - FMDB
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -333,7 +320,6 @@ SPEC REPOS:
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
-    - GTMSessionFetcher
     - leveldb-library
     - nanopb
     - PromisesObjC
@@ -345,8 +331,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_core_web:
     :path: ".symlinks/plugins/firebase_core_web/ios"
-  firebase_storage:
-    :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
   path_provider:
@@ -365,7 +349,6 @@ SPEC CHECKSUMS:
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
   firebase_core: 0c84455537bed6d6b5b8c2dd611ff1fbb1ea5cbd
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
-  firebase_storage: cee2383f53c26690269ab667b4dbfe25452c6caa
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 85064903ed6c28e47fec9c7bd149d94ba1b6b6e7
@@ -374,7 +357,6 @@ SPEC CHECKSUMS:
   FirebaseFirestore: cee8f861d68dadce998876b78a4b75701bc94302
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
-  FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
@@ -383,7 +365,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
-  GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
