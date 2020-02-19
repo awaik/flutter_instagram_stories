@@ -121,7 +121,7 @@ And add stories full functionality to your app.
 
 Plugin works with Firestore database and package https://pub.dev/packages/cloud_firestore already included into plugin.
 
-You can use example with sample database in example folder or create your own database.
+You can use [example](https://github.com/awaik/flutter_instagram_stories/blob/master/example/lib/main.dart) with sample database in example folder or create your own database.
 
 Steps to create:
 
