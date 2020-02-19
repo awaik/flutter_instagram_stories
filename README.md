@@ -6,7 +6,7 @@ A Flutter plugin for displaying stories just like Whatsapp & Instagram. Built-in
 Plugin can be used in any app for displaying news, educational content and etc. [Look the sample app here](https://github.com/awaik/flutter_instagram_stories/blob/master/example/lib/main.dart).
 
 
-*Note*: This plugin is under ative development, and there are some known bugs and a lot of features to implement. Please, add issues or feature requests here: [issue](https://github.com/awaik/flutter_instagram_stories/issues)
+*Note*: This plugin is under active development, and there are some known bugs and a lot of features to implement. Please, add issues or feature requests here: [issue](https://github.com/awaik/flutter_instagram_stories/issues)
 
 
 

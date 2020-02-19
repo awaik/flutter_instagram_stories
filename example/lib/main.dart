@@ -77,6 +77,7 @@ class _HomeState extends State<Home> {
             repeat: true,
             inline: false,
             languageCode: 'en',
+            backgroundColorBetweenStories: Colors.black,
             closeButtonIcon: Icon(
               Icons.close,
               color: Colors.blueGrey,

@@ -28,6 +28,9 @@ class FlutterInstagramStories extends StatefulWidget {
   /// how long story lasts
   int imageStoryDuration;
 
+  /// background color between stories
+  Color backgroundColorBetweenStories;
+
   /// stories close button style
   Icon closeButtonIcon;
   Color closeButtonBackgroundColor;
@@ -50,6 +53,7 @@ class FlutterInstagramStories extends StatefulWidget {
       this.textInIconPadding =
           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       this.imageStoryDuration,
+      this.backgroundColorBetweenStories,
       this.closeButtonIcon,
       this.closeButtonBackgroundColor,
       this.backFromStories,
@@ -66,6 +70,7 @@ class FlutterInstagramStories extends StatefulWidget {
 class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   StoriesData _storiesData;
   final _firestore = Firestore.instance;
+  bool _backStateAdditional = false;
 
   @override
   void dispose() {
@@ -80,6 +85,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
 
   @override
   Widget build(BuildContext context) {
+    String res = ModalRoute.of(context).settings.arguments;
     return Container(
       color: Colors.white,
       height: widget.iconHeight + 24,
@@ -122,6 +128,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
 
           // the variable below is for passing stories ids to screen Stories
           final List<String> storiesIdsList = _storiesData.storiesIdsList;
+
+          _buildFuture(res);
 
           return ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -177,7 +185,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                     ]),
                   ),
                   onTap: () async {
-                    final result = await Navigator.push(
+                    _backStateAdditional = true;
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => GroupedStoriesView(
@@ -187,8 +196,10 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                           progressPosition: widget.progressPosition,
                           repeat: widget.repeat,
                           inline: widget.inline,
+                          backgroundColorBetweenStories:
+                              widget.backgroundColorBetweenStories,
                           closeButtonIcon: widget.closeButtonIcon,
-                          closeButtonBackgroudColor:
+                          closeButtonBackgroundColor:
                               widget.closeButtonBackgroundColor,
                         ),
                         settings: RouteSettings(
@@ -197,10 +208,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                               storiesIdsList: storiesIdsList),
                         ),
                       ),
+                      ModalRoute.withName('/'),
                     );
-                    if (result == 'back_from_stories_view') {
-                      widget.backFromStories();
-                    }
                   },
                 ),
               );
@@ -209,5 +218,12 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
         },
       ),
     );
+  }
+
+  _buildFuture(String res) async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (res == 'back_from_stories_view' && !_backStateAdditional) {
+      widget.backFromStories();
+    }
   }
 }

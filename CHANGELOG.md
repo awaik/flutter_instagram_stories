@@ -7,6 +7,7 @@
   Icon closeButtonIcon;
   Color closeButtonBackgroundColor;
 ```
+* Add option for background color during stories listing `backgroundColorBetweenStories: Colors.black,`
 
 ## 0.1.1
 
