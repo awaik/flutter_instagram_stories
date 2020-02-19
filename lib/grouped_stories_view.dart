@@ -67,13 +67,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
         ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () {
-//        Navigator.pop(context, 'back_from_stories_view');
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/',
-          (_) => false,
-          arguments: 'back_from_stories_view',
-        );
+        _navigateBack();
         return Future.value(false);
       },
       child: Scaffold(
@@ -108,24 +102,12 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       String nextStoryId =
                           storiesListWithPressed.nextElementStoryId();
                       if (nextStoryId == null) {
-                        Navigator.pop(context, 'back_from_stories_view');
+                        _navigateBack();
                       } else {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GroupedStoriesView(
-                              collectionDbName: widget.collectionDbName,
-                              languageCode: widget.languageCode,
-                              imageStoryDuration: widget.imageStoryDuration,
-                              progressPosition: widget.progressPosition,
-                              repeat: widget.repeat,
-                              inline: widget.inline,
-                              backgroundColorBetweenStories:
-                                  widget.backgroundColorBetweenStories,
-                              closeButtonIcon: widget.closeButtonIcon,
-                              closeButtonBackgroundColor:
-                                  widget.closeButtonBackgroundColor,
-                            ),
+                            builder: (context) => _groupedStoriesView(),
                             settings: RouteSettings(
                               arguments: StoriesListWithPressed(
                                   pressedStoryId: nextStoryId,
@@ -139,30 +121,12 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       String previousStoryId =
                           storiesListWithPressed.previousElementStoryId();
                       if (previousStoryId == null) {
-//                        Navigator.pop(context, 'back_from_stories_view');
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/',
-                          (_) => false,
-                          arguments: 'back_from_stories_view',
-                        );
+                        _navigateBack();
                       } else {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => GroupedStoriesView(
-                              collectionDbName: widget.collectionDbName,
-                              languageCode: widget.languageCode,
-                              imageStoryDuration: widget.imageStoryDuration,
-                              progressPosition: widget.progressPosition,
-                              repeat: widget.repeat,
-                              inline: widget.inline,
-                              backgroundColorBetweenStories:
-                                  widget.backgroundColorBetweenStories,
-                              closeButtonIcon: widget.closeButtonIcon,
-                              closeButtonBackgroundColor:
-                                  widget.closeButtonBackgroundColor,
-                            ),
+                            builder: (context) => _groupedStoriesView(),
                             settings: RouteSettings(
                               arguments: StoriesListWithPressed(
                                   pressedStoryId: previousStoryId,
@@ -189,30 +153,12 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         String nextStoryId =
                             storiesListWithPressed.nextElementStoryId();
                         if (nextStoryId == null) {
-//                          Navigator.pop(context, 'back_from_stories_view');
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/',
-                            (_) => false,
-                            arguments: 'back_from_stories_view',
-                          );
+                          _navigateBack();
                         } else {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => GroupedStoriesView(
-                                collectionDbName: widget.collectionDbName,
-                                languageCode: widget.languageCode,
-                                imageStoryDuration: widget.imageStoryDuration,
-                                progressPosition: widget.progressPosition,
-                                repeat: widget.repeat,
-                                inline: widget.inline,
-                                backgroundColorBetweenStories:
-                                    widget.backgroundColorBetweenStories,
-                                closeButtonIcon: widget.closeButtonIcon,
-                                closeButtonBackgroundColor:
-                                    widget.closeButtonBackgroundColor,
-                              ),
+                              builder: (context) => _groupedStoriesView(),
                               settings: RouteSettings(
                                 arguments: StoriesListWithPressed(
                                   pressedStoryId: nextStoryId,
@@ -227,13 +173,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                     ),
                     onVerticalDragUpdate: (details) {
                       if (details.delta.dy > 0) {
-//                        Navigator.pop(context, 'back_from_stories_view');
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/',
-                          (_) => false,
-                          arguments: 'back_from_stories_view',
-                        );
+                        _navigateBack();
                       }
                     },
                   ));
@@ -244,13 +184,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
           alignment: Alignment(1.1, -0.85),
           child: FloatingActionButton(
             onPressed: () {
-//              Navigator.pop(context, 'back_from_stories_view');
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/',
-                (_) => false,
-                arguments: 'back_from_stories_view',
-              );
+              _navigateBack();
             },
             child: widget.closeButtonIcon,
             backgroundColor: widget.closeButtonBackgroundColor,
@@ -258,6 +192,29 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
           ),
         ),
       ),
+    );
+  }
+
+  GroupedStoriesView _groupedStoriesView() {
+    return GroupedStoriesView(
+      collectionDbName: widget.collectionDbName,
+      languageCode: widget.languageCode,
+      imageStoryDuration: widget.imageStoryDuration,
+      progressPosition: widget.progressPosition,
+      repeat: widget.repeat,
+      inline: widget.inline,
+      backgroundColorBetweenStories: widget.backgroundColorBetweenStories,
+      closeButtonIcon: widget.closeButtonIcon,
+      closeButtonBackgroundColor: widget.closeButtonBackgroundColor,
+    );
+  }
+
+  _navigateBack() {
+    return Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (_) => false,
+      arguments: 'back_from_stories_view',
     );
   }
 
