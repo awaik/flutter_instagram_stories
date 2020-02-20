@@ -26,18 +26,19 @@ class GroupedStoriesView extends StatefulWidget {
   Icon closeButtonIcon;
   Color closeButtonBackgroundColor;
   Color backgroundColorBetweenStories;
+  bool sortingOrderDesc;
 
-  GroupedStoriesView({
-    this.collectionDbName,
-    this.languageCode,
-    this.imageStoryDuration = 3,
-    this.progressPosition,
-    this.repeat,
-    this.inline,
-    this.backgroundColorBetweenStories,
-    this.closeButtonIcon,
-    this.closeButtonBackgroundColor,
-  });
+  GroupedStoriesView(
+      {this.collectionDbName,
+      this.languageCode,
+      this.imageStoryDuration = 3,
+      this.progressPosition,
+      this.repeat,
+      this.inline,
+      this.backgroundColorBetweenStories,
+      this.closeButtonIcon,
+      this.closeButtonBackgroundColor,
+      this.sortingOrderDesc});
 
   @override
   _GroupedStoriesViewState createState() => _GroupedStoriesViewState();
@@ -140,7 +141,9 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                   },
                   child: GestureDetector(
                     child: StoryView(
-                      storyItemList[0],
+                      widget.sortingOrderDesc
+                          ? storyItemList[0].reversed.toList()
+                          : storyItemList[0],
                       controller: storyController,
                       progressPosition: widget.progressPosition,
                       repeat: widget.repeat,
@@ -206,6 +209,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
       backgroundColorBetweenStories: widget.backgroundColorBetweenStories,
       closeButtonIcon: widget.closeButtonIcon,
       closeButtonBackgroundColor: widget.closeButtonBackgroundColor,
+      sortingOrderDesc: widget.sortingOrderDesc,
     );
   }
 

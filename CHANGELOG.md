@@ -1,11 +1,21 @@
+## 0.1.3
+
+* Add option `bool sortingOrderDesc;`
+* Add options for highlighting last stories
+```
+    lastIconHighlight: true,
+    lastIconHighlightColor: Colors.deepOrange,
+    lastIconHighlightRadius: const Radius.circular(15.0),
+```
+
 ## 0.1.2
 
 * Add VoidCallback `backFromStories`. This create event when user closed stories screen. Find details in the [example](https://github.com/awaik/flutter_instagram_stories/blob/master/example/lib/main.dart).
 * Add option for styling close button. Find details in the [example](https://github.com/awaik/flutter_instagram_stories/blob/master/example/lib/main.dart).
 ```
-  /// stories close button style
-  Icon closeButtonIcon;
-  Color closeButtonBackgroundColor;
+    /// stories close button style
+    Icon closeButtonIcon;
+    Color closeButtonBackgroundColor;
 ```
 * Add option for background color during stories listing `backgroundColorBetweenStories: Colors.black,`
 

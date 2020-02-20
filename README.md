@@ -24,13 +24,13 @@ Plugin can be used in any app for displaying news, educational content and etc. 
 * Display images, gifs, videos
 * Adjustable titles on icons
 * Preliminary caching after app started
-* Mutilanguage support
+* Multilanguage support
 
 ## Installing
 
 ```yaml
 dependencies:
-  flutter_instagram_stories: ^0.1.2
+  flutter_instagram_stories: ^0.1.3
 ```
 
 Now in your Dart code, you can use:
