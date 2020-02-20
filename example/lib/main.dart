@@ -80,10 +80,10 @@ class _HomeState extends State<Home> {
             backgroundColorBetweenStories: Colors.black,
             closeButtonIcon: Icon(
               Icons.close,
-              color: Colors.blueGrey,
+              color: Colors.white,
               size: 28.0,
             ),
-            closeButtonBackgroundColor: Color(0x00ffffff),
+            closeButtonBackgroundColor: Color(0x11000000),
             sortingOrderDesc: true,
             lastIconHighlight: true,
             lastIconHighlightColor: Colors.deepOrange,

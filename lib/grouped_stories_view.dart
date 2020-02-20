@@ -184,14 +184,17 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
           ),
         ),
         floatingActionButton: Align(
-          alignment: Alignment(1.1, -0.85),
-          child: FloatingActionButton(
-            onPressed: () {
-              _navigateBack();
-            },
-            child: widget.closeButtonIcon,
-            backgroundColor: widget.closeButtonBackgroundColor,
-            elevation: 0,
+          alignment: Alignment(1.0, -0.84),
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                _navigateBack();
+              },
+              child: widget.closeButtonIcon,
+              backgroundColor: widget.closeButtonBackgroundColor,
+              elevation: 0,
+            ),
           ),
         ),
       ),

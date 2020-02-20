@@ -25,13 +25,11 @@ Plugin can be used in any app for displaying news, educational content and etc. 
 * Adjustable titles on icons
 * Preliminary caching after app started
 * Multilanguage support
+* Callback when user closed stories.
 
 ## Installing
 
-```yaml
-dependencies:
-  flutter_instagram_stories: ^0.1.3
-```
+Look how install here [https://pub.dev/packages/flutter_instagram_stories#-installing-tab-](https://pub.dev/packages/flutter_instagram_stories#-installing-tab-)
 
 Now in your Dart code, you can use:
 

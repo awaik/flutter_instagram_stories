@@ -1,3 +1,7 @@
+## 0.1.3+1
+
+* Move close button a little bit.
+
 ## 0.1.3
 
 * Add option `bool sortingOrderDesc;`
