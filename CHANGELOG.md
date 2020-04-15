@@ -1,3 +1,8 @@
+## 0.1.3+2
+
+* Fix some minor bugs.
+
+
 ## 0.1.3+1
 
 * Move close button a little bit.

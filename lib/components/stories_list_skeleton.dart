@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class StoriesListSkeleton extends StatelessWidget {
-  double width;
-  double height;
+  final double width;
+  final double height;
 
   StoriesListSkeleton({
     this.width = 140.0,
@@ -41,8 +41,8 @@ class StoriesListSkeleton extends StatelessWidget {
 }
 
 class StoriesListSkeletonAlone extends StatelessWidget {
-  double width;
-  double height;
+  final double width;
+  final double height;
 
   StoriesListSkeletonAlone({
     this.width = 140.0,

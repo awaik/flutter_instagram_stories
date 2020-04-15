@@ -15,42 +15,42 @@ import 'package:dotted_border/dotted_border.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
   /// the name of collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
-  String collectionDbName;
-  String languageCode;
+  final String collectionDbName;
+  final String languageCode;
 
   /// highlight last icon (story image preview)
-  bool lastIconHighlight;
-  Color lastIconHighlightColor;
-  Radius lastIconHighlightRadius;
+  final bool lastIconHighlight;
+  final Color lastIconHighlightColor;
+  final Radius lastIconHighlightRadius;
 
   /// preview images settings
-  double iconWidth;
-  double iconHeight;
-  bool showTitleOnIcon = true;
-  TextStyle iconTextStyle;
-  BoxDecoration iconBoxDecoration;
-  BorderRadius iconImageBorderRadius;
-  EdgeInsets textInIconPadding;
+  final double iconWidth;
+  final double iconHeight;
+  final bool showTitleOnIcon;
+  final TextStyle iconTextStyle;
+  final BoxDecoration iconBoxDecoration;
+  final BorderRadius iconImageBorderRadius;
+  final EdgeInsets textInIconPadding;
 
   /// how long story lasts
-  int imageStoryDuration;
+  final int imageStoryDuration;
 
   /// background color between stories
-  Color backgroundColorBetweenStories;
+  final Color backgroundColorBetweenStories;
 
   /// stories close button style
-  Icon closeButtonIcon;
-  Color closeButtonBackgroundColor;
+  final Icon closeButtonIcon;
+  final Color closeButtonBackgroundColor;
 
   /// stories sorting order Descending
-  bool sortingOrderDesc;
+  final bool sortingOrderDesc;
 
   /// callback to get data that stories screen was opened
-  VoidCallback backFromStories;
+  final VoidCallback backFromStories;
 
-  ProgressPosition progressPosition;
-  bool repeat;
-  bool inline;
+  final ProgressPosition progressPosition;
+  final bool repeat;
+  final bool inline;
 
   FlutterInstagramStories(
       {@required this.collectionDbName,
@@ -59,7 +59,7 @@ class FlutterInstagramStories extends StatefulWidget {
       this.lastIconHighlightRadius = const Radius.circular(15.0),
       this.iconWidth,
       this.iconHeight,
-      this.showTitleOnIcon,
+      this.showTitleOnIcon = true,
       this.iconTextStyle,
       this.iconBoxDecoration,
       this.iconImageBorderRadius,

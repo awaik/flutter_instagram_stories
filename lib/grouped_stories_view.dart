@@ -17,16 +17,16 @@ import 'models/stories_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GroupedStoriesView extends StatefulWidget {
-  String collectionDbName;
-  String languageCode;
-  int imageStoryDuration;
-  ProgressPosition progressPosition;
-  bool repeat;
-  bool inline;
-  Icon closeButtonIcon;
-  Color closeButtonBackgroundColor;
-  Color backgroundColorBetweenStories;
-  bool sortingOrderDesc;
+  final String collectionDbName;
+  final String languageCode;
+  final int imageStoryDuration;
+  final ProgressPosition progressPosition;
+  final bool repeat;
+  final bool inline;
+  final Icon closeButtonIcon;
+  final Color closeButtonBackgroundColor;
+  final Color backgroundColorBetweenStories;
+  final bool sortingOrderDesc;
 
   GroupedStoriesView(
       {this.collectionDbName,

@@ -57,11 +57,10 @@ class StoriesData {
       'previewImage': toPass['snapshotData']['previewImage'],
     };
     Stories stories = Stories.fromJson(jsonDecode(jsonEncode(temp)));
-    var storyImage;
+
     stories.file.asMap().forEach((index, storyInsideImage) {
       if (storyInsideImage.filetype != 'video') {
-        storyImage =
-            CachedNetworkImageProvider(storyInsideImage.url[languageCode]);
+        CachedNetworkImageProvider(storyInsideImage.url[languageCode]);
         storyItems.add(StoryItem.pageGif(
           storyInsideImage.url[languageCode],
           controller: storyController,

@@ -30,6 +30,7 @@ class ImageLoader {
     }
 
     final fileStream =
+        // ignore: deprecated_member_use
         DefaultCacheManager().getFile(this.url, headers: this.requestHeaders);
 
     fileStream.listen(

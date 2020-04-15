@@ -20,12 +20,12 @@ Plugin can be used in any app for displaying news, educational content and etc. 
 
 # Features
 
-* Only one line of code to implement this plugin to app
-* Display images, gifs, videos
-* Adjustable titles on icons
-* Preliminary caching after app started
-* Multilanguage support
-* Callback when user closed stories.
+* Only one line of code to implement this plugin to app.
+* Display images, gifs, videos.
+* Adjustable titles on icons.
+* Preliminary caching after app started.
+* Multilanguage support.
+* Callback when user closed stories - helps to implement subscriptions after first launch and etc.
 
 ## Installing
 
