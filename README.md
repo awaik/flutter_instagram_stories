@@ -151,5 +151,13 @@ Steps to create:
 
 That's it! Now your app has instagram stories with caching and other powerful features.
 
+## Use cases in the real apps
+
+App for Android and iOS - https://lifext.app/
+
+![Lifext app](example/lib/showcase2.gif)
+
+
+
 
 
