@@ -8,7 +8,7 @@ Plugin can be used in any app for displaying news, educational content and etc. 
 
 *Note*: This plugin is under active development, and there are some known bugs and a lot of features to implement. Please, add issues or feature requests here: [issue](https://github.com/awaik/flutter_instagram_stories/issues)
 
-Project was initially copied from https://github.com/blackmann/story_view - great thanks for this nice package. In case you more flexible functionality you can check original project.
+The project was initially copied from https://github.com/blackmann/story_view - great thanks for this nice package. In case you more flexible functionality you can check the original project.
 
 
 
