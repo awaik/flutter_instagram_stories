@@ -1,3 +1,7 @@
+## 0.1.3+3
+
+* Update dependencies and read.me
+
 ## 0.1.3+2
 
 * Fix some minor bugs.
