@@ -1,4 +1,4 @@
-## 0.1.3+3
+## 0.1.3+4
 
 * Fixed minor issue https://github.com/awaik/flutter_instagram_stories/issues/7
 * Fixed background color between pages
