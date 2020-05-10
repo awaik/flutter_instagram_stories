@@ -72,6 +72,8 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
         return Future.value(false);
       },
       child: Scaffold(
+        backgroundColor: widget.backgroundColorBetweenStories,
+//        backgroundColor: Colors.white,
         body: Container(
           color: Colors.black,
           child: StreamBuilder(
@@ -83,7 +85,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
               if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(
-                    backgroundColor: Colors.lightBlueAccent,
+                    backgroundColor: Colors.grey[700],
                   ),
                 );
               }
@@ -96,6 +98,9 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
               storyItemList.add(_storiesData.storyItems);
 
               return Dismissible(
+                  background:
+                      Container(color: widget.backgroundColorBetweenStories),
+                  crossAxisEndOffset: 0.0,
                   resizeDuration: Duration(milliseconds: 200),
                   key: UniqueKey(),
                   onDismissed: (DismissDirection direction) {
@@ -107,7 +112,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       } else {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
+                          NoAnimationMaterialPageRoute(
                             builder: (context) => _groupedStoriesView(),
                             settings: RouteSettings(
                               arguments: StoriesListWithPressed(
@@ -126,7 +131,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       } else {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
+                          NoAnimationMaterialPageRoute(
                             builder: (context) => _groupedStoriesView(),
                             settings: RouteSettings(
                               arguments: StoriesListWithPressed(
@@ -160,7 +165,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         } else {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(
+                            NoAnimationMaterialPageRoute(
                               builder: (context) => _groupedStoriesView(),
                               settings: RouteSettings(
                                 arguments: StoriesListWithPressed(
@@ -226,4 +231,23 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   }
 
   void _onStoryShow(StoryItem s) {}
+}
+
+class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
+  NoAnimationMaterialPageRoute({
+    @required WidgetBuilder builder,
+    RouteSettings settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+  }) : super(
+            builder: builder,
+            maintainState: maintainState,
+            settings: settings,
+            fullscreenDialog: fullscreenDialog);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return child;
+  }
 }

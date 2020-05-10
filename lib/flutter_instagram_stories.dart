@@ -14,7 +14,7 @@ export 'grouped_stories_view.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
-  /// the name of collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
+  /// the name of the collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
   final String collectionDbName;
   final String languageCode;
 
@@ -66,7 +66,7 @@ class FlutterInstagramStories extends StatefulWidget {
       this.textInIconPadding =
           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       this.imageStoryDuration,
-      this.backgroundColorBetweenStories,
+      this.backgroundColorBetweenStories = Colors.black,
       this.closeButtonIcon,
       this.closeButtonBackgroundColor,
       this.sortingOrderDesc = true,
@@ -214,9 +214,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                     ),
                     onTap: () async {
                       _backStateAdditional = true;
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        NoAnimationMaterialPageRoute(
                           builder: (context) => GroupedStoriesView(
                             collectionDbName: widget.collectionDbName,
                             languageCode: widget.languageCode,
@@ -237,7 +237,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                                 storiesIdsList: storiesIdsList),
                           ),
                         ),
-                        ModalRoute.withName('/'),
+//                        ModalRoute.withName('/'),
                       );
                     },
                   ),
@@ -290,9 +290,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                     ),
                     onTap: () async {
                       _backStateAdditional = true;
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        NoAnimationMaterialPageRoute(
                           builder: (context) => GroupedStoriesView(
                             collectionDbName: widget.collectionDbName,
                             languageCode: widget.languageCode,
@@ -313,7 +313,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                                 storiesIdsList: storiesIdsList),
                           ),
                         ),
-                        ModalRoute.withName('/'),
+//                        ModalRoute.withName('/'),
                       );
                     },
                   ),
@@ -331,5 +331,24 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
     if (res == 'back_from_stories_view' && !_backStateAdditional) {
       widget.backFromStories();
     }
+  }
+}
+
+class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
+  NoAnimationMaterialPageRoute({
+    @required WidgetBuilder builder,
+    RouteSettings settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+  }) : super(
+            builder: builder,
+            maintainState: maintainState,
+            settings: settings,
+            fullscreenDialog: fullscreenDialog);
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return child;
   }
 }
