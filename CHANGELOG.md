@@ -1,3 +1,7 @@
+## 0.1.3+5
+
+* Changed aspect ratio for single story image - it solves issue with iphone 11 displaying.
+
 ## 0.1.3+4
 
 * Fixed minor issue https://github.com/awaik/flutter_instagram_stories/issues/7
