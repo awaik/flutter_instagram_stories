@@ -1,3 +1,27 @@
+## 0.1.3
+
+* Add caption support to each slide. Now it is possible to add to Firestore database the map for each slide
+```
+fileTitle: {en: "Caption on the video"}
+```
+multi language supported by adding maps with different locales.
+
+
+* Add options for styling captions on images & videos
+```
+    captionTextStyle: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                ),
+    captionMargin: EdgeInsets.only(
+      bottom: 50,
+    ),
+    captionPadding: EdgeInsets.symmetric(
+      horizontal: 24,
+      vertical: 8,
+    ),
+```
+
 ## 0.1.3+5
 
 * Changed aspect ratio for single story image - it solves issue with iphone 11 displaying.

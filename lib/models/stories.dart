@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'story_data.dart';
 
@@ -9,14 +10,16 @@ class Stories {
   DateTime date;
   List<StoryData> file;
   String previewImage;
+  // caption on the each story, can be null
   Map<String, String> previewTitle;
 
-  Stories(
-      {this.storyId,
-      this.date,
-      this.file,
-      this.previewImage,
-      this.previewTitle});
+  Stories({
+    this.storyId,
+    this.date,
+    this.file,
+    this.previewImage,
+    this.previewTitle,
+  });
 
   factory Stories.fromJson(Map<String, dynamic> json) =>
       _$StoriesFromJson(json);

@@ -27,18 +27,24 @@ class GroupedStoriesView extends StatefulWidget {
   final Color closeButtonBackgroundColor;
   final Color backgroundColorBetweenStories;
   final bool sortingOrderDesc;
+  TextStyle captionTextStyle;
+  EdgeInsets captionMargin;
+  EdgeInsets captionPadding;
 
   GroupedStoriesView(
       {this.collectionDbName,
       this.languageCode,
-      this.imageStoryDuration = 3,
+      this.imageStoryDuration,
       this.progressPosition,
       this.repeat,
       this.inline,
       this.backgroundColorBetweenStories,
       this.closeButtonIcon,
       this.closeButtonBackgroundColor,
-      this.sortingOrderDesc});
+      this.sortingOrderDesc,
+      this.captionTextStyle,
+      this.captionMargin,
+      this.captionPadding});
 
   @override
   _GroupedStoriesViewState createState() => _GroupedStoriesViewState();
@@ -58,7 +64,9 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
 
   @override
   void initState() {
-    _storiesData = StoriesData(languageCode: widget.languageCode);
+    _storiesData = StoriesData(
+      languageCode: widget.languageCode,
+    );
     super.initState();
   }
 
@@ -89,12 +97,18 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                   ),
                 );
               }
-
               Map<String, dynamic> toPass = {
                 'snapshotData': snapshot.data,
-                'pressedStoryId': storiesListWithPressed.pressedStoryId
+                'pressedStoryId': storiesListWithPressed.pressedStoryId,
+                'captionTextStyle': widget.captionTextStyle,
               };
-              _storiesData.parseStories(toPass, widget.imageStoryDuration);
+              _storiesData.parseStories(
+                toPass,
+                widget.imageStoryDuration,
+                widget.captionTextStyle,
+                widget.captionMargin,
+                widget.captionPadding,
+              );
               storyItemList.add(_storiesData.storyItems);
 
               return Dismissible(
@@ -211,6 +225,9 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
       collectionDbName: widget.collectionDbName,
       languageCode: widget.languageCode,
       imageStoryDuration: widget.imageStoryDuration,
+      captionTextStyle: widget.captionTextStyle,
+      captionMargin: widget.captionMargin,
+      captionPadding: widget.captionPadding,
       progressPosition: widget.progressPosition,
       repeat: widget.repeat,
       inline: widget.inline,

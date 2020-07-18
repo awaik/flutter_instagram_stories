@@ -157,48 +157,48 @@ class StoryItem {
     );
   }
 
-  /// Shorthand for creating inline image page.
-  static StoryItem inlineImage(
-    ImageProvider image, {
-    Text caption,
-    bool shown = false,
-    Duration duration = const Duration(seconds: 3),
-    bool roundedTop = true,
-    bool roundedBottom = false,
-  }) {
-    return StoryItem(
-      Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(roundedTop ? 8 : 0),
-              bottom: Radius.circular(roundedBottom ? 8 : 0),
-            ),
-            image: DecorationImage(
-              image: image,
-              fit: BoxFit.cover,
-            )),
-        child: Container(
-          margin: EdgeInsets.only(
-            bottom: 16,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 8,
-          ),
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              child: caption == null ? SizedBox() : caption,
-              width: double.infinity,
-            ),
-          ),
-        ),
-      ),
-      shown: shown,
-      duration: duration,
-    );
-  }
+//  /// Shorthand for creating inline image page.
+//  static StoryItem inlineImage(
+//    ImageProvider image, {
+//    Text caption,
+//    bool shown = false,
+//    Duration duration = const Duration(seconds: 3),
+//    bool roundedTop = true,
+//    bool roundedBottom = false,
+//  }) {
+//    return StoryItem(
+//      Container(
+//        decoration: BoxDecoration(
+//            color: Colors.grey[100],
+//            borderRadius: BorderRadius.vertical(
+//              top: Radius.circular(roundedTop ? 8 : 0),
+//              bottom: Radius.circular(roundedBottom ? 8 : 0),
+//            ),
+//            image: DecorationImage(
+//              image: image,
+//              fit: BoxFit.cover,
+//            )),
+//        child: Container(
+//          margin: EdgeInsets.only(
+//            bottom: 16,
+//          ),
+//          padding: EdgeInsets.symmetric(
+//            horizontal: 24,
+//            vertical: 8,
+//          ),
+//          child: Align(
+//            alignment: Alignment.bottomLeft,
+//            child: Container(
+//              child: caption == null ? SizedBox() : caption,
+//              width: double.infinity,
+//            ),
+//          ),
+//        ),
+//      ),
+//      shown: shown,
+//      duration: duration,
+//    );
+//  }
 
   static StoryItem pageGif(
     String url, {
@@ -208,6 +208,9 @@ class StoryItem {
     bool shown = false,
     Duration duration = const Duration(seconds: 3),
     Map<String, dynamic> requestHeaders,
+    TextStyle captionTextStyle,
+    EdgeInsets captionMargin,
+    EdgeInsets captionPadding,
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
@@ -227,23 +230,15 @@ class StoryItem {
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         width: double.infinity,
-                        margin: EdgeInsets.only(
-                          bottom: 24,
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 8,
-                        ),
+                        margin: captionMargin,
+                        padding: captionPadding,
                         color: caption != null && caption.length > 0
                             ? Colors.black54
                             : Colors.red,
                         child: caption != null && caption.length > 0
                             ? Text(
                                 caption,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
+                                style: captionTextStyle,
                                 textAlign: TextAlign.center,
                               )
                             : SizedBox(),
@@ -259,63 +254,63 @@ class StoryItem {
     );
   }
 
-  /// Shorthand for creating inline image page.
-  static StoryItem inlineGif(
-    String url, {
-    Text caption,
-    StoryController controller,
-    BoxFit imageFit = BoxFit.cover,
-    Map<String, dynamic> requestHeaders,
-    bool shown = false,
-    Duration duration = const Duration(seconds: 3),
-    bool roundedTop = true,
-    bool roundedBottom = false,
-  }) {
-    return StoryItem(
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(roundedTop ? 8 : 0),
-            bottom: Radius.circular(roundedBottom ? 8 : 0),
-          ),
-        ),
-        child: Container(
-          color: Colors.black,
-          child: Stack(
-            children: <Widget>[
-              StoryImage.url(
-                url,
-                controller: controller,
-                fit: imageFit,
-                requestHeaders: requestHeaders,
-              ),
-              caption.data != null && caption.data.length > 0
-                  ? Container(
-                      margin: EdgeInsets.only(
-                        bottom: 16,
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Container(
-                          child: caption == null ? SizedBox() : caption,
-                          width: double.infinity,
-                        ),
-                      ),
-                    )
-                  : Container(),
-            ],
-          ),
-        ),
-      ),
-      shown: shown,
-      duration: duration,
-    );
-  }
+//  /// Shorthand for creating inline image page.
+//  static StoryItem inlineGif(
+//    String url, {
+//    Text caption,
+//    StoryController controller,
+//    BoxFit imageFit = BoxFit.cover,
+//    Map<String, dynamic> requestHeaders,
+//    bool shown = false,
+//    Duration duration = const Duration(seconds: 3),
+//    bool roundedTop = true,
+//    bool roundedBottom = false,
+//  }) {
+//    return StoryItem(
+//      Container(
+//        decoration: BoxDecoration(
+//          color: Colors.grey[100],
+//          borderRadius: BorderRadius.vertical(
+//            top: Radius.circular(roundedTop ? 8 : 0),
+//            bottom: Radius.circular(roundedBottom ? 8 : 0),
+//          ),
+//        ),
+//        child: Container(
+//          color: Colors.black,
+//          child: Stack(
+//            children: <Widget>[
+//              StoryImage.url(
+//                url,
+//                controller: controller,
+//                fit: imageFit,
+//                requestHeaders: requestHeaders,
+//              ),
+//              caption.data != null && caption.data.length > 0
+//                  ? Container(
+//                      margin: EdgeInsets.only(
+//                        bottom: 16,
+//                      ),
+//                      padding: EdgeInsets.symmetric(
+//                        horizontal: 24,
+//                        vertical: 8,
+//                      ),
+//                      child: Align(
+//                        alignment: Alignment.bottomLeft,
+//                        child: Container(
+//                          child: caption == null ? SizedBox() : caption,
+//                          width: double.infinity,
+//                        ),
+//                      ),
+//                    )
+//                  : Container(),
+//            ],
+//          ),
+//        ),
+//      ),
+//      shown: shown,
+//      duration: duration,
+//    );
+//  }
 
   static StoryItem pageVideo(
     String url, {
@@ -323,11 +318,15 @@ class StoryItem {
     //TODO: adjust duration to video length
     Duration duration = const Duration(seconds: 10),
     BoxFit imageFit = BoxFit.fitWidth,
-    String caption,
     bool shown = false,
     Map<String, dynamic> requestHeaders,
+    String caption,
+    TextStyle captionTextStyle,
+    EdgeInsets captionMargin,
+    EdgeInsets captionPadding,
   }) {
     assert(imageFit != null, "[imageFit] should not be null");
+
     return StoryItem(
       Container(
         color: Colors.black,
@@ -343,27 +342,19 @@ class StoryItem {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(
-                    bottom: 24,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 8,
-                  ),
+                  margin: captionMargin,
+                  padding: captionPadding,
                   color: caption != null ? Colors.black54 : Colors.transparent,
                   child: caption != null
                       ? Text(
                           caption,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                          ),
+                          style: captionTextStyle,
                           textAlign: TextAlign.center,
                         )
                       : SizedBox(),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'stories.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -8,7 +9,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 class StoriesData {
   String languageCode;
 
-  StoriesData({this.languageCode});
+  StoriesData({
+    this.languageCode,
+  });
 
   int _cacheDepth = 4;
   List<String> _storiesIdsList = [];
@@ -49,6 +52,9 @@ class StoriesData {
   void parseStories(
     Map<String, dynamic> toPass,
     imageStoryDuration,
+    TextStyle captionTextStyle,
+    EdgeInsets captionMargin,
+    EdgeInsets captionPadding,
   ) {
     Map<String, dynamic> temp = {
       'storyId': toPass['pressedStoryId'],
@@ -57,7 +63,6 @@ class StoriesData {
       'previewImage': toPass['snapshotData']['previewImage'],
     };
     Stories stories = Stories.fromJson(jsonDecode(jsonEncode(temp)));
-
     stories.file.asMap().forEach((index, storyInsideImage) {
       if (storyInsideImage.filetype != 'video') {
         CachedNetworkImageProvider(storyInsideImage.url[languageCode]);
@@ -65,12 +70,24 @@ class StoriesData {
           storyInsideImage.url[languageCode],
           controller: storyController,
           duration: Duration(seconds: imageStoryDuration),
+          caption: storyInsideImage.fileTitle != null
+              ? storyInsideImage.fileTitle[languageCode]
+              : null,
+          captionTextStyle: captionTextStyle,
+          captionMargin: captionMargin,
+          captionPadding: captionPadding,
         ));
       } else {
         storyItems.add(
           StoryItem.pageVideo(
             storyInsideImage.url[languageCode],
             controller: storyController,
+            caption: storyInsideImage.fileTitle != null
+                ? storyInsideImage.fileTitle[languageCode]
+                : null,
+            captionTextStyle: captionTextStyle,
+            captionPadding: captionPadding,
+            captionMargin: captionMargin,
           ),
         );
       }

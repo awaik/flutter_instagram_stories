@@ -32,6 +32,11 @@ class FlutterInstagramStories extends StatefulWidget {
   final BorderRadius iconImageBorderRadius;
   final EdgeInsets textInIconPadding;
 
+  /// caption on image
+  final TextStyle captionTextStyle;
+  final EdgeInsets captionMargin;
+  final EdgeInsets captionPadding;
+
   /// how long story lasts
   final int imageStoryDuration;
 
@@ -65,7 +70,18 @@ class FlutterInstagramStories extends StatefulWidget {
       this.iconImageBorderRadius,
       this.textInIconPadding =
           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-      this.imageStoryDuration,
+      this.captionTextStyle = const TextStyle(
+        fontSize: 15,
+        color: Colors.white,
+      ),
+      this.captionMargin = const EdgeInsets.only(
+        bottom: 24,
+      ),
+      this.captionPadding = const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 8,
+      ),
+      this.imageStoryDuration = 5,
       this.backgroundColorBetweenStories = Colors.black,
       this.closeButtonIcon,
       this.closeButtonBackgroundColor,
@@ -230,6 +246,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                             closeButtonBackgroundColor:
                                 widget.closeButtonBackgroundColor,
                             sortingOrderDesc: widget.sortingOrderDesc,
+                            captionTextStyle: widget.captionTextStyle,
+                            captionPadding: widget.captionPadding,
+                            captionMargin: widget.captionMargin,
                           ),
                           settings: RouteSettings(
                             arguments: StoriesListWithPressed(
@@ -306,6 +325,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                             closeButtonBackgroundColor:
                                 widget.closeButtonBackgroundColor,
                             sortingOrderDesc: widget.sortingOrderDesc,
+                            captionTextStyle: widget.captionTextStyle,
+                            captionPadding: widget.captionPadding,
+                            captionMargin: widget.captionMargin,
                           ),
                           settings: RouteSettings(
                             arguments: StoriesListWithPressed(
