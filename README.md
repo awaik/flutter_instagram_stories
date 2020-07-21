@@ -153,7 +153,7 @@ Steps to create:
 - Create a collection with any name. After you will use this name in dart code only once.
 - Create documents inside the collection with exact structure, like on the image below
 
-![Showcase|100x100, 10%](example/lib/collection_structure.png)
+![Showcase|100x100, 10%](example/lib/collection_structure2.png)
 
 That's it! Now your app has instagram stories with caching and other powerful features.
 
