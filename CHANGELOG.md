@@ -1,3 +1,7 @@
+## 0.1.4+2
+
+* Add image with database structure.
+
 ## 0.1.4+1
 
 * Add to readme info about new options.
