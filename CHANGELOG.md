@@ -1,4 +1,8 @@
-## 0.1.3
+## 0.1.4+1
+
+* Add to readme info about new options.
+
+## 0.1.4
 
 * Add caption support to each slide. Now it is possible to add to Firestore database the map for each slide
 ```

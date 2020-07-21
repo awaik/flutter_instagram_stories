@@ -27,9 +27,9 @@ class GroupedStoriesView extends StatefulWidget {
   final Color closeButtonBackgroundColor;
   final Color backgroundColorBetweenStories;
   final bool sortingOrderDesc;
-  TextStyle captionTextStyle;
-  EdgeInsets captionMargin;
-  EdgeInsets captionPadding;
+  final TextStyle captionTextStyle;
+  final EdgeInsets captionMargin;
+  final EdgeInsets captionPadding;
 
   GroupedStoriesView(
       {this.collectionDbName,

@@ -110,12 +110,28 @@ And add stories full functionality to your app.
         repeat: true,
         inline: false,
         languageCode: 'en',
+        backgroundColorBetweenStories: Colors.black,
         closeButtonIcon: Icon(
           Icons.close,
-          color: Colors.blueGrey,
+          color: Colors.white,
           size: 28.0,
         ),
-        closeButtonBackgroundColor: Color(0x00ffffff),
+        closeButtonBackgroundColor: Color(0x11000000),
+        sortingOrderDesc: true,
+        lastIconHighlight: true,
+        lastIconHighlightColor: Colors.deepOrange,
+        lastIconHighlightRadius: const Radius.circular(15.0),
+        captionTextStyle: TextStyle(
+          fontSize: 22,
+          color: Colors.white,
+        ),
+        captionMargin: EdgeInsets.only(
+          bottom: 50,
+        ),
+        captionPadding: EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 8,
+        ),
       ),
 ```
 
@@ -136,20 +152,6 @@ Steps to create:
 
 - Create a collection with any name. After you will use this name in dart code only once.
 - Create documents inside the collection with exact structure, like on the image below
-
-
-```
-    DateTime date;
-    List file
-       // for example
-       // [{String filetype, String url}
-       //  {String filetype, String url}
-       //  ...]
-    String previewImage;
-    Map previewTitle
-       // for example
-       // {"en": someText, "anyLangCode": someText}
-```
 
 ![Showcase|100x100, 10%](example/lib/collection_structure.png)
 
