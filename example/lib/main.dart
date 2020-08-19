@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_instagram_stories/flutter_instagram_stories.dart';
 import 'style.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,7 +33,7 @@ class _HomeState extends State<Home> {
 
   //TODO: add possibility get data from any API
   CollectionReference dbInstance =
-      Firestore.instance.collection(collectionDbName);
+      FirebaseFirestore.instance.collection(collectionDbName);
 
   @override
   void initState() {

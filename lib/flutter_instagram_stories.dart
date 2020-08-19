@@ -99,7 +99,7 @@ class FlutterInstagramStories extends StatefulWidget {
 
 class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   StoriesData _storiesData;
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   bool _backStateAdditional = false;
 
   @override
@@ -155,6 +155,9 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             );
           }
           final stories = snapshot.data.documents;
+
+          print(
+              '++++++++++++++++++++++++++++++++++++++++++++++++++11 ${stories[0].data()}');
 
           final List<Stories> storyWidgets =
               _storiesData.parseStoriesPreview(stories);

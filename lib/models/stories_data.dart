@@ -26,11 +26,12 @@ class StoriesData {
     for (var story in stories) {
       final Stories storyData = Stories.fromJson({
         'storyId': story.documentID,
-        'date': DateTime.fromMillisecondsSinceEpoch(story.data['date'].seconds)
-            .toIso8601String(),
-        'file': jsonDecode(jsonEncode(story.data['file'])),
-        'previewImage': story.data['previewImage'],
-        'previewTitle': jsonDecode(jsonEncode(story.data['previewTitle'])),
+        'date':
+            DateTime.fromMillisecondsSinceEpoch(story.data()['date'].seconds)
+                .toIso8601String(),
+        'file': jsonDecode(jsonEncode(story.data()['file'])),
+        'previewImage': story.data()['previewImage'],
+        'previewTitle': jsonDecode(jsonEncode(story.data()['previewTitle'])),
       });
       if (storyData.file != null) {
         storyWidgets.add(storyData);
