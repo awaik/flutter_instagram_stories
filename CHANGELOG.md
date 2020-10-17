@@ -1,9 +1,12 @@
+## 0.1.5+1
+
+* Upgrade packages
+
 ## 0.1.5
 
 * Update code for `cloud_firestore: ^0.14.0` and for `Flutter (Channel stable, 1.20.2`
 
 Important!  cloud_firestore: ^0.14.0 have changed some methods, that could require to rewrite some code in your app.
-
 
 ## 0.1.4+2
 

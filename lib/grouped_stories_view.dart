@@ -87,7 +87,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
           child: StreamBuilder(
             stream: _firestore
                 .collection(widget.collectionDbName)
-                .document(storiesListWithPressed.pressedStoryId)
+                .doc(storiesListWithPressed.pressedStoryId)
                 .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {

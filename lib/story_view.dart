@@ -157,49 +157,6 @@ class StoryItem {
     );
   }
 
-//  /// Shorthand for creating inline image page.
-//  static StoryItem inlineImage(
-//    ImageProvider image, {
-//    Text caption,
-//    bool shown = false,
-//    Duration duration = const Duration(seconds: 3),
-//    bool roundedTop = true,
-//    bool roundedBottom = false,
-//  }) {
-//    return StoryItem(
-//      Container(
-//        decoration: BoxDecoration(
-//            color: Colors.grey[100],
-//            borderRadius: BorderRadius.vertical(
-//              top: Radius.circular(roundedTop ? 8 : 0),
-//              bottom: Radius.circular(roundedBottom ? 8 : 0),
-//            ),
-//            image: DecorationImage(
-//              image: image,
-//              fit: BoxFit.cover,
-//            )),
-//        child: Container(
-//          margin: EdgeInsets.only(
-//            bottom: 16,
-//          ),
-//          padding: EdgeInsets.symmetric(
-//            horizontal: 24,
-//            vertical: 8,
-//          ),
-//          child: Align(
-//            alignment: Alignment.bottomLeft,
-//            child: Container(
-//              child: caption == null ? SizedBox() : caption,
-//              width: double.infinity,
-//            ),
-//          ),
-//        ),
-//      ),
-//      shown: shown,
-//      duration: duration,
-//    );
-//  }
-
   static StoryItem pageGif(
     String url, {
     StoryController controller,
@@ -253,64 +210,6 @@ class StoryItem {
       duration: duration,
     );
   }
-
-//  /// Shorthand for creating inline image page.
-//  static StoryItem inlineGif(
-//    String url, {
-//    Text caption,
-//    StoryController controller,
-//    BoxFit imageFit = BoxFit.cover,
-//    Map<String, dynamic> requestHeaders,
-//    bool shown = false,
-//    Duration duration = const Duration(seconds: 3),
-//    bool roundedTop = true,
-//    bool roundedBottom = false,
-//  }) {
-//    return StoryItem(
-//      Container(
-//        decoration: BoxDecoration(
-//          color: Colors.grey[100],
-//          borderRadius: BorderRadius.vertical(
-//            top: Radius.circular(roundedTop ? 8 : 0),
-//            bottom: Radius.circular(roundedBottom ? 8 : 0),
-//          ),
-//        ),
-//        child: Container(
-//          color: Colors.black,
-//          child: Stack(
-//            children: <Widget>[
-//              StoryImage.url(
-//                url,
-//                controller: controller,
-//                fit: imageFit,
-//                requestHeaders: requestHeaders,
-//              ),
-//              caption.data != null && caption.data.length > 0
-//                  ? Container(
-//                      margin: EdgeInsets.only(
-//                        bottom: 16,
-//                      ),
-//                      padding: EdgeInsets.symmetric(
-//                        horizontal: 24,
-//                        vertical: 8,
-//                      ),
-//                      child: Align(
-//                        alignment: Alignment.bottomLeft,
-//                        child: Container(
-//                          child: caption == null ? SizedBox() : caption,
-//                          width: double.infinity,
-//                        ),
-//                      ),
-//                    )
-//                  : Container(),
-//            ],
-//          ),
-//        ),
-//      ),
-//      shown: shown,
-//      duration: duration,
-//    );
-//  }
 
   static StoryItem pageVideo(
     String url, {
@@ -756,7 +655,11 @@ class PageBarState extends State<PageBar> {
     super.initState();
 
     int count = widget.pages.length;
-    spacing = count > 15 ? 1 : count > 10 ? 2 : 4;
+    spacing = count > 15
+        ? 1
+        : count > 10
+            ? 2
+            : 4;
 
     widget.animation.addListener(() {
       setState(() {});
@@ -784,7 +687,11 @@ class PageBarState extends State<PageBar> {
             padding: EdgeInsets.only(
                 right: widget.pages.last == it ? 0 : this.spacing),
             child: StoryProgressIndicator(
-              isPlaying(it) ? widget.animation.value : it.shown ? 1 : 0,
+              isPlaying(it)
+                  ? widget.animation.value
+                  : it.shown
+                      ? 1
+                      : 0,
               indicatorHeight:
                   widget.indicatorHeight == IndicatorHeight.large ? 5 : 3,
             ),
