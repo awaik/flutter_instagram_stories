@@ -154,7 +154,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
               },
             );
           }
-          final stories = snapshot.data.documents;
+          final stories = snapshot.data.docs;
 
           final List<Stories> storyWidgets =
               _storiesData.parseStoriesPreview(stories);
