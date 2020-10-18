@@ -119,7 +119,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
     return Container(
       color: Colors.white,
       height: widget.iconHeight + 24,
-      child: StreamBuilder(
+      child: StreamBuilder<QuerySnapshot>(
         stream: _firestore
             .collection(widget.collectionDbName)
             .orderBy('date', descending: widget.sortingOrderDesc)

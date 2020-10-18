@@ -81,7 +81,6 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
       },
       child: Scaffold(
         backgroundColor: widget.backgroundColorBetweenStories,
-//        backgroundColor: Colors.white,
         body: Container(
           color: Colors.black,
           child: StreamBuilder(
@@ -98,7 +97,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                 );
               }
               Map<String, dynamic> toPass = {
-                'snapshotData': snapshot.data,
+                'snapshotData': snapshot.data.data(),
                 'pressedStoryId': storiesListWithPressed.pressedStoryId,
                 'captionTextStyle': widget.captionTextStyle,
               };

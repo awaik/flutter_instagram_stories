@@ -1,3 +1,14 @@
+## 0.1.5+3
+
+* Change deprecated document() to doc() in Firestore request
+
+
+## 0.1.5+2
+
+* Fixed bug with snapshot data
+* Removed unneccesary packages.
+* Fixed bug with flutter_cache_manager: ^2.0.0, by downgrading package.
+
 ## 0.1.5+1
 
 * Upgrade packages

@@ -20,7 +20,7 @@ The project was initially copied from https://github.com/blackmann/story_view - 
 2. This is a first beta version, please add all issues and feature requests here: [issue](https://github.com/awaik/flutter_instagram_stories/issues)
 
 
-# Features
+## Features
 
 * Only one line of code to implement this package to the app.
 * Display images, gifs, videos.
