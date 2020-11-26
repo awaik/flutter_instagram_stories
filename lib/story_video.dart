@@ -29,7 +29,7 @@ class VideoLoader {
       onComplete();
     }
 
-    final fileStream =
+    final Stream<FileInfo> fileStream =
         // ignore: deprecated_member_use
         DefaultCacheManager().getFile(this.url, headers: this.requestHeaders);
 

@@ -304,10 +304,10 @@ PODS:
     - Flutter
   - path_provider_windows (0.0.1):
     - Flutter
-  - PromisesObjC (1.2.10)
-  - sqflite (0.0.1):
+  - PromisesObjC (1.2.11)
+  - sqflite (0.0.2):
     - Flutter
-    - FMDB (~> 2.7.2)
+    - FMDB (>= 2.7.5)
   - video_player (0.0.1):
     - Flutter
   - video_player_web (0.0.1):
@@ -393,11 +393,11 @@ SPEC CHECKSUMS:
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
   path_provider_windows: a2b81600c677ac1959367280991971cb9a1edb3b
-  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
 
-PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+PODFILE CHECKSUM: e45c292f618eeca3034958d33b444b6e1249b55f
 
 COCOAPODS: 1.9.3
