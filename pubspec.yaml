@@ -12,6 +12,7 @@ dependencies:
   rxdart: ^0.26.0
   video_player: ^2.0.0
   cached_network_image: ^3.0.0-nullsafety
+  flutter_cache_manager: ^3.0.0-nullsafety.1
   firebase_core: ^1.0.0
   cloud_firestore: ^1.0.0
   dotted_border: ^2.0.0-nullsafety.0
