@@ -8,8 +8,7 @@ The package can be used in any app for displaying news, educational content and 
 
 *Note*: This package is under active development, and there are some known bugs and a lot of features to implement. Please, add issues or feature requests here: [issue](https://github.com/awaik/flutter_instagram_stories/issues)
 
-The project was initially copied from https://github.com/blackmann/story_view - great thanks for this excellent package. In case, you more flexible functionality, you can check the original repository.
-
+The project was initially copied from https://github.com/blackmann/story_view - great thanks for this excellent package. In case, you need more flexible functionality, you can check the original repository.
 
 
 ![Showcase|100x100, 10%](example/lib/showcase1.gif)

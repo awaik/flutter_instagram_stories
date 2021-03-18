@@ -10,14 +10,11 @@ import 'package:video_player/video_player.dart';
 import 'utils.dart';
 
 class VideoLoader {
-  //TODO: for now video lasts 10 seconds - add video length detection
-  //TODO: for now while downloading timer is going. Stop timer while loading, display video after first 3 seconds load.
+  String? url;
 
-  String url;
+  File? videoFile;
 
-  File videoFile;
-
-  Map<String, dynamic> requestHeaders;
+  Map<String, dynamic>? requestHeaders;
 
   LoadState state = LoadState.loading;
 
@@ -31,7 +28,8 @@ class VideoLoader {
 
     final Stream<FileInfo> fileStream =
         // ignore: deprecated_member_use
-        DefaultCacheManager().getFile(this.url, headers: this.requestHeaders);
+        DefaultCacheManager().getFile(this.url!,
+            headers: this.requestHeaders as Map<String, String>?);
 
     fileStream.listen((fileInfo) {
       if (this.videoFile == null) {
@@ -44,18 +42,18 @@ class VideoLoader {
 }
 
 class StoryVideo extends StatefulWidget {
-  final StoryController storyController;
+  final StoryController? storyController;
   final VideoLoader videoLoader;
 
-  StoryVideo(this.videoLoader, {this.storyController, Key key})
+  StoryVideo(this.videoLoader, {this.storyController, Key? key})
       : super(key: key ?? UniqueKey());
 
   static StoryVideo url(
-    String url, {
-    StoryController controller,
-    Map<String, dynamic> requestHeaders,
-    VoidCallback adjustDuration,
-    Key key,
+    String? url, {
+    StoryController? controller,
+    Map<String, dynamic>? requestHeaders,
+    VoidCallback? adjustDuration,
+    Key? key,
   }) {
     return StoryVideo(
       VideoLoader(url, requestHeaders: requestHeaders),
@@ -71,11 +69,11 @@ class StoryVideo extends StatefulWidget {
 }
 
 class StoryVideoState extends State<StoryVideo> {
-  Future<void> playerLoader;
+  Future<void>? playerLoader;
 
-  StreamSubscription _streamSubscription;
+  StreamSubscription? _streamSubscription;
 
-  VideoPlayerController playerController;
+  VideoPlayerController? playerController;
 
   @override
   void initState() {
@@ -84,26 +82,26 @@ class StoryVideoState extends State<StoryVideo> {
       () {
         if (widget.videoLoader.state == LoadState.success) {
           this.playerController =
-              VideoPlayerController.file(widget.videoLoader.videoFile);
+              VideoPlayerController.file(widget.videoLoader.videoFile!);
 
-          playerController.initialize().then((v) {
-            setState(() {});
-            widget.storyController.play();
+          playerController!.initialize().then((v) {
+            // setState(() {});
+            widget.storyController!.play();
           });
 
           if (widget.storyController != null) {
-            playerController.addListener(checkIfVideoFinished);
-            _streamSubscription =
-                widget.storyController.playbackNotifier.listen((playbackState) {
+            playerController!.addListener(checkIfVideoFinished);
+            _streamSubscription = widget.storyController!.playbackNotifier
+                .listen((playbackState) {
               if (playbackState == PlaybackState.pause) {
-                playerController.pause();
+                playerController!.pause();
               } else {
-                playerController.play();
+                playerController!.play();
               }
             });
           }
         } else {
-          setState(() {});
+          // setState(() {});
         }
       },
     );
@@ -121,11 +119,11 @@ class StoryVideoState extends State<StoryVideo> {
 
   Widget getContentView() {
     if (widget.videoLoader.state == LoadState.success &&
-        playerController.value.initialized) {
+        playerController!.value.duration != null) {
       return Center(
         child: AspectRatio(
-          aspectRatio: playerController.value.aspectRatio,
-          child: VideoPlayer(playerController),
+          aspectRatio: playerController!.value.aspectRatio,
+          child: VideoPlayer(playerController!),
         ),
       );
     }
@@ -158,9 +156,9 @@ class StoryVideoState extends State<StoryVideo> {
 
   void checkIfVideoFinished() {
     try {
-      if (playerController.value.position.inSeconds ==
-          playerController.value.duration.inSeconds) {
-        playerController.removeListener(checkIfVideoFinished);
+      if (playerController!.value.position.inSeconds ==
+          playerController!.value.duration.inSeconds) {
+        playerController!.removeListener(checkIfVideoFinished);
       }
     } catch (e) {}
   }

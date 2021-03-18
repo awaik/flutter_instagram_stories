@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -11,11 +12,11 @@ import 'utils.dart';
 /// Utitlity to load image (gif, png, jpg, etc) media just once. Resource is
 /// cached to disk with default configurations of [DefaultCacheManager].
 class ImageLoader {
-  ui.Codec frames;
+  ui.Codec? frames;
 
-  String url;
+  String? url;
 
-  Map<String, dynamic> requestHeaders;
+  Map<String, dynamic>? requestHeaders;
 
   LoadState state = LoadState.loading; // by default
 
@@ -29,12 +30,11 @@ class ImageLoader {
       onComplete();
     }
 
-    final fileStream =
-        // ignore: deprecated_member_use
-        DefaultCacheManager().getFile(this.url, headers: this.requestHeaders);
+    final fileStream = DefaultCacheManager().getFileStream(this.url!,
+        headers: this.requestHeaders as Map<String, String>?);
 
     fileStream.listen(
-      (fileInfo) {
+      (FileResponse fileInfo) {
         // the reason for this is that, when the cache manager fetches
         // the image again from network, the provided `onComplete` should
         // not be called again
@@ -42,18 +42,17 @@ class ImageLoader {
           return;
         }
 
-        final imageBytes = fileInfo.file.readAsBytesSync();
-
         this.state = LoadState.success;
 
-        PaintingBinding.instance.instantiateImageCodec(imageBytes).then(
-            (codec) {
-          this.frames = codec;
-          onComplete();
-        }, onError: (error) {
-          this.state = LoadState.failure;
-          onComplete();
-        });
+        /// todo fix
+
+        // PaintingBinding.instance!.instantiateImageCodec(fileInfo.originalUrl).then((codec) {
+        //   this.frames = codec;
+        //   onComplete();
+        // }, onError: (error) {
+        //   this.state = LoadState.failure;
+        //   onComplete();
+        // });
       },
       onError: (error) {
         this.state = LoadState.failure;
@@ -69,24 +68,24 @@ class ImageLoader {
 class StoryImage extends StatefulWidget {
   final ImageLoader imageLoader;
 
-  final BoxFit fit;
+  final BoxFit? fit;
 
-  final StoryController controller;
+  final StoryController? controller;
 
   StoryImage(
     this.imageLoader, {
-    Key key,
+    Key? key,
     this.controller,
     this.fit,
   }) : super(key: key ?? UniqueKey());
 
   /// Use this shorthand to fetch images/gifs from the provided [url]
   static StoryImage url(
-    String url, {
-    StoryController controller,
-    Map<String, dynamic> requestHeaders,
+    String? url, {
+    StoryController? controller,
+    Map<String, dynamic>? requestHeaders,
     BoxFit fit = BoxFit.fitWidth,
-    Key key,
+    Key? key,
   }) {
     return StoryImage(
         ImageLoader(
@@ -103,11 +102,11 @@ class StoryImage extends StatefulWidget {
 }
 
 class StoryImageState extends State<StoryImage> {
-  ui.Image currentFrame;
+  ui.Image? currentFrame;
 
-  Timer _timer;
+  Timer? _timer;
 
-  StreamSubscription<PlaybackState> _streamSubscription;
+  StreamSubscription<PlaybackState>? _streamSubscription;
 
   @override
   void initState() {
@@ -115,7 +114,7 @@ class StoryImageState extends State<StoryImage> {
 
     if (widget.controller != null) {
       this._streamSubscription =
-          widget.controller.playbackNotifier.listen((playbackState) {
+          widget.controller!.playbackNotifier.listen((playbackState) {
         // for the case of gifs we need to pause/play
         if (widget.imageLoader.frames == null) {
           return;
@@ -163,11 +162,11 @@ class StoryImageState extends State<StoryImage> {
     this._timer?.cancel();
 
     if (widget.controller != null &&
-        widget.controller.playbackNotifier.value == PlaybackState.pause) {
+        await widget.controller!.playbackNotifier.last == PlaybackState.pause) {
       return;
     }
 
-    final nextFrame = await widget.imageLoader.frames.getNextFrame();
+    final nextFrame = await widget.imageLoader.frames!.getNextFrame();
 
     this.currentFrame = nextFrame.image;
 

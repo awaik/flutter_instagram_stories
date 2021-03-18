@@ -17,7 +17,6 @@ class Themes {
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
     accentColor: lightAccent,
-    cursorColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     inputDecorationTheme:
         InputDecorationTheme(labelStyle: TextStyle(color: Colors.black87)),

@@ -5,12 +5,12 @@ part 'stories.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Stories {
-  String storyId;
-  DateTime date;
-  List<StoryData> file;
-  String previewImage;
+  String? storyId;
+  DateTime? date;
+  List<StoryData>? file;
+  String? previewImage;
   // caption on the each story, can be null
-  Map<String, String> previewTitle;
+  Map<String, String>? previewTitle;
 
   Stories({
     this.storyId,

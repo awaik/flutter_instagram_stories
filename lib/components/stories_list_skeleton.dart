@@ -42,8 +42,8 @@ class StoriesListSkeletonAlone extends StatelessWidget {
   final double height;
 
   StoriesListSkeletonAlone({
-    this.width = 140.0,
-    this.height = 178.0,
+    this.width = 140,
+    this.height = 178,
   });
 
   @override

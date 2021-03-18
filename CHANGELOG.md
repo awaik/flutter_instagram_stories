@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Flutter 2.0.0 & null safety
+
 ## 0.1.5+7
 
 * Updated dependencies

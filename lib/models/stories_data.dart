@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'stories.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_instagram_stories/story_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class StoriesData {
-  String languageCode;
+  String? languageCode;
 
   StoriesData({
     this.languageCode,
@@ -22,25 +23,25 @@ class StoriesData {
 
   List<Stories> parseStoriesPreview(var stories) {
     List<Stories> storyWidgets = [];
-    for (var story in stories) {
+    for (QueryDocumentSnapshot story in stories) {
       final Stories storyData = Stories.fromJson({
-        'storyId': story.documentID,
+        'storyId': story.id,
         'date':
-            DateTime.fromMillisecondsSinceEpoch(story.data()['date'].seconds)
+            DateTime.fromMillisecondsSinceEpoch(story.data()!['date'].seconds)
                 .toIso8601String(),
-        'file': jsonDecode(jsonEncode(story.data()['file'])),
-        'previewImage': story.data()['previewImage'],
-        'previewTitle': jsonDecode(jsonEncode(story.data()['previewTitle'])),
+        'file': jsonDecode(jsonEncode(story.data()!['file'])),
+        'previewImage': story.data()!['previewImage'],
+        'previewTitle': jsonDecode(jsonEncode(story.data()!['previewTitle'])),
       });
       if (storyData.file != null) {
         storyWidgets.add(storyData);
-        _storiesIdsList.add(story.documentID);
+        _storiesIdsList.add(story.id);
 
 //         preliminary caching
         var i = 0;
-        for (var file in storyData.file) {
+        for (var file in storyData.file!) {
           if (file.filetype == 'image' && i < _cacheDepth) {
-            DefaultCacheManager().getSingleFile(file.url[languageCode]);
+            DefaultCacheManager().getSingleFile(file.url![languageCode!]!);
             i += 1;
           }
         }
@@ -52,9 +53,9 @@ class StoriesData {
   void parseStories(
     Map<String, dynamic> toPass,
     imageStoryDuration,
-    TextStyle captionTextStyle,
-    EdgeInsets captionMargin,
-    EdgeInsets captionPadding,
+    TextStyle? captionTextStyle,
+    EdgeInsets? captionMargin,
+    EdgeInsets? captionPadding,
   ) {
     Map<String, dynamic> temp = {
       'storyId': toPass['pressedStoryId'],
@@ -63,27 +64,39 @@ class StoriesData {
       'previewImage': toPass['snapshotData']['previewImage'],
     };
     Stories stories = Stories.fromJson(jsonDecode(jsonEncode(temp)));
-    stories.file.asMap().forEach((index, storyInsideImage) {
+    stories.file!.asMap().forEach((index, storyInsideImage) {
       if (storyInsideImage.filetype != 'video') {
-        CachedNetworkImageProvider(storyInsideImage.url[languageCode]);
-        storyItems.add(StoryItem.pageGif(
-          storyInsideImage.url[languageCode],
-          controller: storyController,
+        storyItems.add(StoryItem.pageImage(
+          CachedNetworkImageProvider(storyInsideImage.url![languageCode!]!),
+          // controller: storyController,
           duration: Duration(seconds: imageStoryDuration),
           caption: storyInsideImage.fileTitle != null
-              ? storyInsideImage.fileTitle[languageCode]
+              ? storyInsideImage.fileTitle![languageCode!]
               : null,
-          captionTextStyle: captionTextStyle,
-          captionMargin: captionMargin,
-          captionPadding: captionPadding,
+          // captionTextStyle: captionTextStyle,
+          // captionMargin: captionMargin,
+          // captionPadding: captionPadding,
         ));
+
+        ///todo fix
+        // storyItems.add(StoryItem.pageGif(
+        //   storyInsideImage.url![languageCode!],
+        //   controller: storyController,
+        //   duration: Duration(seconds: imageStoryDuration),
+        //   caption: storyInsideImage.fileTitle != null
+        //       ? storyInsideImage.fileTitle![languageCode!]
+        //       : null,
+        //   captionTextStyle: captionTextStyle,
+        //   captionMargin: captionMargin,
+        //   captionPadding: captionPadding,
+        // ));
       } else {
         storyItems.add(
           StoryItem.pageVideo(
-            storyInsideImage.url[languageCode],
+            storyInsideImage.url![languageCode!],
             controller: storyController,
             caption: storyInsideImage.fileTitle != null
-                ? storyInsideImage.fileTitle[languageCode]
+                ? storyInsideImage.fileTitle![languageCode!]
                 : null,
             captionTextStyle: captionTextStyle,
             captionPadding: captionPadding,
@@ -92,9 +105,9 @@ class StoriesData {
         );
       }
       // cache images inside story
-      if (index < stories.file.length - 1) {
+      if (index < stories.file!.length - 1) {
         DefaultCacheManager()
-            .getSingleFile(stories.file[index + 1].url[languageCode]);
+            .getSingleFile(stories.file![index + 1].url![languageCode!]!);
       }
     });
   }

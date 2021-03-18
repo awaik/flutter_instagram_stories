@@ -24,12 +24,12 @@ class FlutterInstagramStories extends StatefulWidget {
   final Radius lastIconHighlightRadius;
 
   /// preview images settings
-  final double iconWidth;
-  final double iconHeight;
+  final double? iconWidth;
+  final double? iconHeight;
   final bool showTitleOnIcon;
-  final TextStyle iconTextStyle;
-  final BoxDecoration iconBoxDecoration;
-  final BorderRadius iconImageBorderRadius;
+  final TextStyle? iconTextStyle;
+  final BoxDecoration? iconBoxDecoration;
+  final BorderRadius? iconImageBorderRadius;
   final EdgeInsets textInIconPadding;
 
   /// caption on image
@@ -44,21 +44,21 @@ class FlutterInstagramStories extends StatefulWidget {
   final Color backgroundColorBetweenStories;
 
   /// stories close button style
-  final Icon closeButtonIcon;
-  final Color closeButtonBackgroundColor;
+  final Icon? closeButtonIcon;
+  final Color? closeButtonBackgroundColor;
 
   /// stories sorting order Descending
   final bool sortingOrderDesc;
 
   /// callback to get data that stories screen was opened
-  final VoidCallback backFromStories;
+  final VoidCallback? backFromStories;
 
   final ProgressPosition progressPosition;
   final bool repeat;
   final bool inline;
 
   FlutterInstagramStories(
-      {@required this.collectionDbName,
+      {required this.collectionDbName,
       this.lastIconHighlight = false,
       this.lastIconHighlightColor = Colors.deepOrange,
       this.lastIconHighlightRadius = const Radius.circular(15.0),
@@ -98,7 +98,7 @@ class FlutterInstagramStories extends StatefulWidget {
 }
 
 class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
-  StoriesData _storiesData;
+  late StoriesData _storiesData;
   final _firestore = FirebaseFirestore.instance;
   bool _backStateAdditional = false;
 
@@ -115,10 +115,10 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
 
   @override
   Widget build(BuildContext context) {
-    String res = ModalRoute.of(context).settings.arguments;
+    String? res = ModalRoute.of(context)!.settings.arguments as String?;
     return Container(
       color: Colors.white,
-      height: widget.iconHeight + 24,
+      height: widget.iconHeight! + 24,
       child: StreamBuilder<QuerySnapshot>(
         stream: _firestore
             .collection(widget.collectionDbName)
@@ -142,8 +142,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                           ClipRRect(
                             borderRadius: widget.iconImageBorderRadius,
                             child: StoriesListSkeletonAlone(
-                              width: widget.iconWidth,
-                              height: widget.iconHeight,
+                              width: widget.iconWidth!,
+                              height: widget.iconHeight!,
                             ),
                           ),
                         ],
@@ -154,7 +154,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
               },
             );
           }
-          final stories = snapshot.data.docs;
+          List<QueryDocumentSnapshot> stories = snapshot.data!.docs;
 
           final List<Stories> storyWidgets =
               _storiesData.parseStoriesPreview(stories);
@@ -170,7 +170,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             itemCount: storyWidgets == null ? 0 : stories.length,
             itemBuilder: (BuildContext context, int index) {
               Stories story = storyWidgets[index];
-              story.previewTitle.putIfAbsent(widget.languageCode, () => '');
+              story.previewTitle!.putIfAbsent(widget.languageCode, () => '');
 
               if (index == 0 && widget.lastIconHighlight) {
                 return Padding(
@@ -192,14 +192,14 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                             ClipRRect(
                               borderRadius: widget.iconImageBorderRadius,
                               child: CachedNetworkImage(
-                                imageUrl: story.previewImage,
+                                imageUrl: story.previewImage!,
                                 width: widget.iconWidth,
                                 height: widget.iconHeight,
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) =>
                                     StoriesListSkeletonAlone(
-                                  width: widget.iconWidth,
-                                  height: widget.iconHeight,
+                                  width: widget.iconWidth!,
+                                  height: widget.iconHeight!,
                                 ),
                                 errorWidget: (context, url, error) =>
                                     Icon(Icons.error),
@@ -216,7 +216,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                                   Padding(
                                     padding: widget.textInIconPadding,
                                     child: Text(
-                                      story.previewTitle[widget.languageCode],
+                                      story.previewTitle![widget.languageCode]!,
                                       style: widget.iconTextStyle,
                                       textAlign: TextAlign.left,
                                     ),
@@ -273,14 +273,14 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         ClipRRect(
                           borderRadius: widget.iconImageBorderRadius,
                           child: CachedNetworkImage(
-                            imageUrl: story.previewImage,
+                            imageUrl: story.previewImage!,
                             width: widget.iconWidth,
                             height: widget.iconHeight,
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
                                 StoriesListSkeletonAlone(
-                              width: widget.iconWidth,
-                              height: widget.iconHeight,
+                              width: widget.iconWidth!,
+                              height: widget.iconHeight!,
                             ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
@@ -297,7 +297,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                               Padding(
                                 padding: widget.textInIconPadding,
                                 child: Text(
-                                  story.previewTitle[widget.languageCode],
+                                  story.previewTitle![widget.languageCode]!,
                                   style: widget.iconTextStyle,
                                   textAlign: TextAlign.left,
                                 ),
@@ -348,18 +348,18 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
     );
   }
 
-  _buildFuture(String res) async {
+  _buildFuture(String? res) async {
     await Future.delayed(const Duration(seconds: 1));
     if (res == 'back_from_stories_view' && !_backStateAdditional) {
-      widget.backFromStories();
+      widget.backFromStories!();
     }
   }
 }
 
 class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
   NoAnimationMaterialPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) : super(

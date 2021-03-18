@@ -17,19 +17,19 @@ import 'models/stories_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GroupedStoriesView extends StatefulWidget {
-  final String collectionDbName;
-  final String languageCode;
-  final int imageStoryDuration;
-  final ProgressPosition progressPosition;
-  final bool repeat;
-  final bool inline;
-  final Icon closeButtonIcon;
-  final Color closeButtonBackgroundColor;
-  final Color backgroundColorBetweenStories;
-  final bool sortingOrderDesc;
-  final TextStyle captionTextStyle;
-  final EdgeInsets captionMargin;
-  final EdgeInsets captionPadding;
+  final String? collectionDbName;
+  final String? languageCode;
+  final int? imageStoryDuration;
+  final ProgressPosition? progressPosition;
+  final bool? repeat;
+  final bool? inline;
+  final Icon? closeButtonIcon;
+  final Color? closeButtonBackgroundColor;
+  final Color? backgroundColorBetweenStories;
+  final bool? sortingOrderDesc;
+  final TextStyle? captionTextStyle;
+  final EdgeInsets? captionMargin;
+  final EdgeInsets? captionPadding;
 
   GroupedStoriesView(
       {this.collectionDbName,
@@ -54,7 +54,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   final _firestore = FirebaseFirestore.instance;
   final storyController = StoryController();
   List<List<StoryItem>> storyItemList = [];
-  StoriesData _storiesData;
+  late StoriesData _storiesData;
 
   @override
   void dispose() {
@@ -73,7 +73,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   @override
   Widget build(BuildContext context) {
     final StoriesListWithPressed storiesListWithPressed =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context)!.settings.arguments as StoriesListWithPressed;
     return WillPopScope(
       onWillPop: () {
         _navigateBack();
@@ -83,12 +83,12 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
         backgroundColor: widget.backgroundColorBetweenStories,
         body: Container(
           color: Colors.black,
-          child: StreamBuilder(
-            stream: _firestore
-                .collection(widget.collectionDbName)
+          child: FutureBuilder<DocumentSnapshot>(
+            future: _firestore
+                .collection(widget.collectionDbName!)
                 .doc(storiesListWithPressed.pressedStoryId)
-                .snapshots(),
-            builder: (context, snapshot) {
+                .get(),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(
@@ -97,7 +97,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                 );
               }
               Map<String, dynamic> toPass = {
-                'snapshotData': snapshot.data.data(),
+                'snapshotData': snapshot.data?.data(),
                 'pressedStoryId': storiesListWithPressed.pressedStoryId,
                 'captionTextStyle': widget.captionTextStyle,
               };
@@ -118,7 +118,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                   key: UniqueKey(),
                   onDismissed: (DismissDirection direction) {
                     if (direction == DismissDirection.endToStart) {
-                      String nextStoryId =
+                      String? nextStoryId =
                           storiesListWithPressed.nextElementStoryId();
                       if (nextStoryId == null) {
                         _navigateBack();
@@ -137,7 +137,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         );
                       }
                     } else {
-                      String previousStoryId =
+                      String? previousStoryId =
                           storiesListWithPressed.previousElementStoryId();
                       if (previousStoryId == null) {
                         _navigateBack();
@@ -159,19 +159,19 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                   },
                   child: GestureDetector(
                     child: StoryView(
-                      widget.sortingOrderDesc
+                      widget.sortingOrderDesc!
                           ? storyItemList[0].reversed.toList()
                           : storyItemList[0],
                       controller: storyController,
-                      progressPosition: widget.progressPosition,
-                      repeat: widget.repeat,
-                      inline: widget.inline,
+                      progressPosition: widget.progressPosition!,
+                      repeat: widget.repeat!,
+                      inline: widget.inline!,
                       onStoryShow: (StoryItem s) {
                         _onStoryShow(s);
                       },
                       goForward: () {},
                       onComplete: () {
-                        String nextStoryId =
+                        String? nextStoryId =
                             storiesListWithPressed.nextElementStoryId();
                         if (nextStoryId == null) {
                           _navigateBack();
@@ -251,8 +251,8 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
 
 class NoAnimationMaterialPageRoute<T> extends MaterialPageRoute<T> {
   NoAnimationMaterialPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) : super(

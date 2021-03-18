@@ -126,7 +126,7 @@ class _HomeState extends State<Home> {
   _backFromStoriesAlert() {
     showDialog(
       context: context,
-      child: SimpleDialog(
+      builder: (_) => SimpleDialog(
         title: Text(
           "User have looked stories and closed them.",
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18.0),
