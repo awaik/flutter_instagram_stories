@@ -48,13 +48,13 @@ From documentation:
 
 2. For iOS, add the following to the Info.plist file found at <project root>/ios/Runner/Info.plist.
 
-'''
-	<key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-    </dict>
-'''
+```
+<key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
+```
 
 ## Usage
 
