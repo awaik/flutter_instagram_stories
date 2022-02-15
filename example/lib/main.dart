@@ -1,12 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_instagram_stories/flutter_instagram_stories.dart';
-import 'style.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_instagram_stories/flutter_instagram_stories.dart';
+
+import 'firebase_options.dart';
+import 'style.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(MyApp());
 }
@@ -32,8 +36,7 @@ class _HomeState extends State<Home> {
   static String collectionDbName = 'instagram_stories_db';
 
   //TODO: add possibility get data from any API
-  CollectionReference dbInstance =
-      FirebaseFirestore.instance.collection(collectionDbName);
+  CollectionReference dbInstance = FirebaseFirestore.instance.collection(collectionDbName);
 
   @override
   void initState() {
@@ -75,8 +78,7 @@ class _HomeState extends State<Home> {
             ),
             iconWidth: 150.0,
             iconHeight: 150.0,
-            textInIconPadding:
-                EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
+            textInIconPadding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
             //how long story lasts in seconds
             imageStoryDuration: 7,
             progressPosition: ProgressPosition.top,

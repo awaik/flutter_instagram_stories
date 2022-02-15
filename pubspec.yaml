@@ -9,17 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: ^0.26.0
-  video_player: ^2.0.0
-  cached_network_image: ^3.0.0-nullsafety
-  flutter_cache_manager: ^3.0.0-nullsafety.1
-  firebase_core: ^1.0.0
-  cloud_firestore: ^1.0.0
-  dotted_border: ^2.0.0-nullsafety.0
-  json_annotation: ^4.0.0
-  collection: ^1.15.0-nullsafety.4
+  rxdart: ^0.27.3
+  video_player: ^2.2.18
+  cached_network_image: ^3.2.0
+  flutter_cache_manager: ^3.3.0
+  firebase_core: ^1.12.0
+  cloud_firestore: ^3.1.8
+  dotted_border: ^2.0.0+2
+  json_annotation: ^4.4.0
+  collection: ^1.15.0
 
 dev_dependencies:
-  build_runner: ^1.11.5
-  json_serializable: ^4.0.2
+  build_runner: ^2.1.7
+  json_serializable: ^6.1.4
   test:
