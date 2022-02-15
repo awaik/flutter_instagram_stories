@@ -1,3 +1,8 @@
+## 1.0.1
+
+* Updated dependencies
+* Recreated example - now it is runnable again
+
 ## 1.0.0
 
 * Flutter 2.0.0 & null safety

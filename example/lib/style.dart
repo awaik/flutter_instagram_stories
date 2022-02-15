@@ -18,7 +18,8 @@ class Themes {
     primaryColor: lightPrimary,
     accentColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
-    inputDecorationTheme: InputDecorationTheme(labelStyle: TextStyle(color: Colors.black87)),
+    inputDecorationTheme:
+        InputDecorationTheme(labelStyle: TextStyle(color: Colors.black87)),
     appBarTheme: AppBarTheme(
       elevation: 0,
       titleTextStyle: TextStyle(

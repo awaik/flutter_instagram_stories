@@ -27,7 +27,9 @@ class StoriesData {
     for (final story in stories) {
       final Stories storyData = Stories.fromJson({
         'storyId': story.id,
-        'date': DateTime.fromMillisecondsSinceEpoch(story.data()!['date'].seconds).toIso8601String(),
+        'date':
+            DateTime.fromMillisecondsSinceEpoch(story.data()!['date'].seconds)
+                .toIso8601String(),
         'file': jsonDecode(jsonEncode(story.data()!['file'])),
         'previewImage': story.data()!['previewImage'],
         'previewTitle': jsonDecode(jsonEncode(story.data()!['previewTitle'])),
@@ -69,7 +71,9 @@ class StoriesData {
           CachedNetworkImageProvider(storyInsideImage.url![languageCode!]!),
           // controller: storyController,
           duration: Duration(seconds: imageStoryDuration),
-          caption: storyInsideImage.fileTitle != null ? storyInsideImage.fileTitle![languageCode!] : null,
+          caption: storyInsideImage.fileTitle != null
+              ? storyInsideImage.fileTitle![languageCode!]
+              : null,
           // captionTextStyle: captionTextStyle,
           // captionMargin: captionMargin,
           // captionPadding: captionPadding,
@@ -92,7 +96,9 @@ class StoriesData {
           StoryItem.pageVideo(
             storyInsideImage.url![languageCode!],
             controller: storyController,
-            caption: storyInsideImage.fileTitle != null ? storyInsideImage.fileTitle![languageCode!] : null,
+            caption: storyInsideImage.fileTitle != null
+                ? storyInsideImage.fileTitle![languageCode!]
+                : null,
             captionTextStyle: captionTextStyle,
             captionPadding: captionPadding,
             captionMargin: captionMargin,
@@ -101,7 +107,8 @@ class StoriesData {
       }
       // cache images inside story
       if (index < stories.file!.length - 1) {
-        DefaultCacheManager().getSingleFile(stories.file![index + 1].url![languageCode!]!);
+        DefaultCacheManager()
+            .getSingleFile(stories.file![index + 1].url![languageCode!]!);
       }
     });
   }

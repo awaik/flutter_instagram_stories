@@ -36,7 +36,8 @@ class _HomeState extends State<Home> {
   static String collectionDbName = 'instagram_stories_db';
 
   //TODO: add possibility get data from any API
-  CollectionReference dbInstance = FirebaseFirestore.instance.collection(collectionDbName);
+  CollectionReference dbInstance =
+      FirebaseFirestore.instance.collection(collectionDbName);
 
   @override
   void initState() {
@@ -78,7 +79,8 @@ class _HomeState extends State<Home> {
             ),
             iconWidth: 150.0,
             iconHeight: 150.0,
-            textInIconPadding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
+            textInIconPadding:
+                EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
             //how long story lasts in seconds
             imageStoryDuration: 7,
             progressPosition: ProgressPosition.top,

@@ -1,7 +1,7 @@
 name: flutter_instagram_stories
 homepage: https://github.com/awaik/flutter_instagram_stories
 description: Display stories (videos and images) like Whatsapp & Instagram.
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
