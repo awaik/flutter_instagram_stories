@@ -12,10 +12,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,11 +25,13 @@ class MyApp extends StatelessWidget {
         //TODO: implement dark mode switcher and adapt plugin for dark mode
         theme: Themes.lightTheme,
         darkTheme: Themes.darkTheme,
-        home: Home());
+        home: const Home());
   }
 }
 
 class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -48,7 +52,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter instagram stories"),
+        title: const Text("Flutter instagram stories"),
       ),
       body: Column(
         children: <Widget>[
@@ -58,12 +62,12 @@ class _HomeState extends State<Home> {
             backFromStories: () {
               _backFromStoriesAlert();
             },
-            iconTextStyle: TextStyle(
+            iconTextStyle: const TextStyle(
               fontSize: 14.0,
               color: Colors.white,
             ),
             iconImageBorderRadius: BorderRadius.circular(15.0),
-            iconBoxDecoration: BoxDecoration(
+            iconBoxDecoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
               color: Color(0xFFffffff),
               boxShadow: [
@@ -80,7 +84,7 @@ class _HomeState extends State<Home> {
             iconWidth: 150.0,
             iconHeight: 150.0,
             textInIconPadding:
-                EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
+                const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
             //how long story lasts in seconds
             imageStoryDuration: 7,
             progressPosition: ProgressPosition.top,
@@ -88,29 +92,29 @@ class _HomeState extends State<Home> {
             inline: false,
             languageCode: 'en',
             backgroundColorBetweenStories: Colors.black,
-            closeButtonIcon: Icon(
+            closeButtonIcon: const Icon(
               Icons.close,
               color: Colors.white,
               size: 28.0,
             ),
-            closeButtonBackgroundColor: Color(0x11000000),
+            closeButtonBackgroundColor: const Color(0x11000000),
             sortingOrderDesc: true,
             lastIconHighlight: true,
             lastIconHighlightColor: Colors.deepOrange,
             lastIconHighlightRadius: const Radius.circular(15.0),
-            captionTextStyle: TextStyle(
+            captionTextStyle: const TextStyle(
               fontSize: 22,
               color: Colors.white,
             ),
-            captionMargin: EdgeInsets.only(
+            captionMargin: const EdgeInsets.only(
               bottom: 50,
             ),
-            captionPadding: EdgeInsets.symmetric(
+            captionPadding: const EdgeInsets.symmetric(
               horizontal: 24,
               vertical: 8,
             ),
           ),
-          Center(
+          const Center(
             child: Padding(
               padding: EdgeInsets.all(20.0),
               child: Text(
@@ -131,13 +135,13 @@ class _HomeState extends State<Home> {
     showDialog(
       context: context,
       builder: (_) => SimpleDialog(
-        title: Text(
+        title: const Text(
           "User have looked stories and closed them.",
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18.0),
         ),
         children: <Widget>[
           SimpleDialogOption(
-            child: Text("Dismiss"),
+            child: const Text("Dismiss"),
             onPressed: () {
               Navigator.pop(context);
             },

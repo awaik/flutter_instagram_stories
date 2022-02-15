@@ -1,17 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
 
-import 'models/stories.dart';
-import 'settings.dart';
-import 'models/stories_list_with_pressed.dart';
 import 'components//stories_list_skeleton.dart';
-import 'models/stories_data.dart';
 import 'grouped_stories_view.dart';
+import 'models/stories.dart';
+import 'models/stories_data.dart';
+import 'models/stories_list_with_pressed.dart';
 
 export 'grouped_stories_view.dart';
-
-import 'package:dotted_border/dotted_border.dart';
 
 class FlutterInstagramStories extends StatefulWidget {
   /// the name of the collection in Firestore, more info here https://github.com/awaik/flutter_instagram_stories
@@ -167,7 +165,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
             primary: false,
-            itemCount: storyWidgets == null ? 0 : stories.length,
+            itemCount: stories.length,
             itemBuilder: (BuildContext context, int index) {
               Stories story = storyWidgets[index];
               story.previewTitle!.putIfAbsent(widget.languageCode, () => '');

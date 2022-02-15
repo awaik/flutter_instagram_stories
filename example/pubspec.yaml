@@ -11,10 +11,12 @@ dependencies:
     sdk: flutter
 
   # change the path later
-  flutter_instagram_stories:
-    path: ../
+  flutter_instagram_stories: any
+#    path: ../
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
+
   flutter_test:
     sdk: flutter
 

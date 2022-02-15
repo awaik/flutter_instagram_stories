@@ -1,4 +1,4 @@
-## 1.0.1
+## 1.0.1+1
 
 * Updated dependencies
 * Recreated example - now it is runnable again

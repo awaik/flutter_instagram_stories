@@ -1,18 +1,18 @@
-import 'dart:math';
-import 'dart:ui';
 import 'dart:async';
+import 'dart:math';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'story_video.dart';
-import 'story_image.dart';
-import 'story_controller.dart';
-import 'settings.dart';
 
+import 'settings.dart';
+import 'story_controller.dart';
+import 'story_image.dart';
+import 'story_video.dart';
+
+export 'story_controller.dart';
 export 'story_image.dart';
 export 'story_video.dart';
-export 'story_controller.dart';
 
 /// This is a representation of a story item (or page).
 class StoryItem {
@@ -37,7 +37,7 @@ class StoryItem {
     this.view, {
     this.duration = const Duration(seconds: 3),
     this.shown = false,
-  }) : assert(duration != null, "[duration] should not be null");
+  });
 
   /// Short hand to create text-only page.
   ///
@@ -106,7 +106,6 @@ class StoryItem {
     bool shown = false,
     Duration duration = const Duration(seconds: 3),
   }) {
-    assert(imageFit != null, "[imageFit] should not be null");
     return StoryItem(
       Container(
         color: Colors.black,
@@ -133,19 +132,15 @@ class StoryItem {
                           horizontal: 24,
                           vertical: 8,
                         ),
-                        color: caption != null
-                            ? Colors.black54
-                            : Colors.transparent,
-                        child: caption != null
-                            ? Text(
-                                caption,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                              )
-                            : SizedBox(),
+                        color: Colors.black54,
+                        child: Text(
+                          caption,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   )
@@ -189,10 +184,8 @@ class StoryItem {
                         width: double.infinity,
                         margin: captionMargin,
                         padding: captionPadding,
-                        color: caption != null && caption.length > 0
-                            ? Colors.black54
-                            : Colors.red,
-                        child: caption != null && caption.length > 0
+                        color: caption.length > 0 ? Colors.black54 : Colors.red,
+                        child: caption.length > 0
                             ? Text(
                                 caption,
                                 style: captionTextStyle,
@@ -224,8 +217,6 @@ class StoryItem {
     EdgeInsets? captionMargin,
     EdgeInsets? captionPadding,
   }) {
-    assert(imageFit != null, "[imageFit] should not be null");
-
     return StoryItem(
       Container(
         color: Colors.black,
@@ -302,14 +293,8 @@ class StoryView extends StatefulWidget {
     this.progressPosition = ProgressPosition.top,
     this.repeat = false,
     this.inline = false,
-  })  : assert(storyItems != null && storyItems.length > 0,
-            "[storyItems] should not be null or empty"),
-        assert(progressPosition != null, "[progressPosition] cannot be null"),
-        assert(
-          repeat != null,
-          "[repeat] cannot be null",
-        ),
-        assert(inline != null, "[inline] cannot be null");
+  }) : assert(
+            storyItems.length > 0, "[storyItems] should not be null or empty");
 
   @override
   State<StatefulWidget> createState() {
@@ -712,7 +697,7 @@ class StoryProgressIndicator extends StatelessWidget {
   StoryProgressIndicator(
     this.value, {
     this.indicatorHeight = 5,
-  }) : assert(indicatorHeight != null && indicatorHeight > 0,
+  }) : assert(indicatorHeight > 0,
             "[indicatorHeight] should not be null or less than 1");
 
   @override
