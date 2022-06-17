@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "163557874485",
+    "firebase_url": "https://flutter-instagram-stories.firebaseio.com",
+    "project_id": "flutter-instagram-stories",
+    "storage_bucket": "flutter-instagram-stories.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163557874485:android:78436bfa3fe0f291c6ca7c",
+        "android_client_info": {
+          "package_name": "com.awaik.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163557874485-re0ufg2udfb3pfspeq54mp4jtiif9qlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANi5krzaMcqW0rTM8E31IR1sZ1CaYVqNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163557874485-re0ufg2udfb3pfspeq54mp4jtiif9qlm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163557874485-mp2gp8elqukuo6kldoli774ib6ipuo8p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pro.awaik.flutter-instagram-stories-example"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163557874485:android:9598778b15ffa686c6ca7c",
+        "android_client_info": {
+          "package_name": "pro.awaik.flutter_instagram_stories_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163557874485-afot62s3fbcct786rdsdjvfo4d9tp1uo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pro.awaik.flutter_instagram_stories_example",
+            "certificate_hash": "c1c0820a74ffdeccc3b4d9e4100c1a9c10bddb7f"
+          }
+        },
+        {
+          "client_id": "163557874485-re0ufg2udfb3pfspeq54mp4jtiif9qlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANi5krzaMcqW0rTM8E31IR1sZ1CaYVqNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163557874485-re0ufg2udfb3pfspeq54mp4jtiif9qlm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "163557874485-mp2gp8elqukuo6kldoli774ib6ipuo8p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pro.awaik.flutter-instagram-stories-example"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
