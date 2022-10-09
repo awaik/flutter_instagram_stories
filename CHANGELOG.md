@@ -1,3 +1,7 @@
+## 1.0.2+1
+
+* Updated dependencies
+
 ## 1.0.2
 
 * Fixed bug wil null error (issue: 14)
