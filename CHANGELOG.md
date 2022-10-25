@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Deleted predefined background color https://github.com/awaik/flutter_instagram_stories/issues/18
+
 ## 1.0.2+1
 
 * Updated dependencies

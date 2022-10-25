@@ -115,7 +115,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
   Widget build(BuildContext context) {
     String? res = ModalRoute.of(context)!.settings.arguments as String?;
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       height: widget.iconHeight! + 24,
       child: StreamBuilder<QuerySnapshot>(
         stream: _firestore
