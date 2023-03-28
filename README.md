@@ -1,5 +1,6 @@
 # flutter_instagram_stories [![Pub](https://img.shields.io/pub/v/flutter_instagram_stories.svg)](https://pub.dev/packages/flutter_instagram_stories)
 
+## If you need a help to implement stories in your app, contact me https://github.com/awaik 
 
 A Flutter package for displaying stories just like Whatsapp & Instagram. Built-in groups (multiple stories with one icon), cache, video, gifs.
 
