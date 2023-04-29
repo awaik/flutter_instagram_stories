@@ -25,3 +25,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+false_secrets:
+  - /example/lib/firebase_options.dart
+  - /example/android/app/google-services.json

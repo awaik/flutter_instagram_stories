@@ -155,6 +155,11 @@ Steps to create:
 
 ![Showcase|100x100, 10%](example/lib/collection_structure2.png)
 
+Important! Pay attention to array, map types. Otherwise you will have a null error
+https://github.com/awaik/flutter_instagram_stories/issues/20
+
+![Data structure](https://user-images.githubusercontent.com/5330807/234784223-bea15356-e152-4d14-9311-3a3a6f00086f.png)
+
 That's it! Now your app has instagram stories with caching and other powerful features.
 
 ## Use cases in real apps

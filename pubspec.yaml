@@ -13,8 +13,8 @@ dependencies:
   video_player: ^2.6.0
   cached_network_image: ^3.2.3
   flutter_cache_manager: ^3.3.0
-  firebase_core: ^2.8.0
-  cloud_firestore: ^4.4.5
+  firebase_core: ^2.10.0
+  cloud_firestore: ^4.5.3
   dotted_border: any
   json_annotation: any
   collection: any
