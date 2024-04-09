@@ -85,7 +85,7 @@ class StoryVideoState extends State<StoryVideo> {
               VideoPlayerController.file(widget.videoLoader.videoFile!);
 
           playerController!.initialize().then((v) {
-            // setState(() {});
+            setState(() {});
             widget.storyController!.play();
           });
 
@@ -101,7 +101,7 @@ class StoryVideoState extends State<StoryVideo> {
             });
           }
         } else {
-          // setState(() {});
+          setState(() {});
         }
       },
     );

@@ -27,7 +27,7 @@ class FlutterInstagramStories extends StatefulWidget {
   final bool showTitleOnIcon;
   final TextStyle? iconTextStyle;
   final BoxDecoration? iconBoxDecoration;
-  final BorderRadius? iconImageBorderRadius;
+  final BorderRadiusGeometry iconImageBorderRadius;
   final EdgeInsets textInIconPadding;
 
   /// caption on image
@@ -65,7 +65,8 @@ class FlutterInstagramStories extends StatefulWidget {
       this.showTitleOnIcon = true,
       this.iconTextStyle,
       this.iconBoxDecoration,
-      this.iconImageBorderRadius,
+      this.iconImageBorderRadius =
+          const BorderRadius.all(Radius.circular(15.0)),
       this.textInIconPadding =
           const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       this.captionTextStyle = const TextStyle(
