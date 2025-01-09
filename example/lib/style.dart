@@ -14,7 +14,7 @@ class Themes {
 
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    backgroundColor: lightBG,
+    // backgroundColor: lightBG,
     primaryColor: lightPrimary,
     scaffoldBackgroundColor: lightBG,
     inputDecorationTheme: const InputDecorationTheme(
@@ -35,7 +35,7 @@ class Themes {
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    backgroundColor: darkBG,
+    // backgroundColor: darkBG,
     canvasColor: darkPrimary,
   );
 }
